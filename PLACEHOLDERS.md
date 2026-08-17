@@ -49,8 +49,6 @@ radiomics content. Two places are written to accept one when it exists:
 - **Contact form** in `forms/contact-us.md` is the Google Form carried over from the
   source GitBook. Confirm it is the right one for MED3pa.
 - **Discord invite** in `SUMMARY.md` is the MEDomicsLab invite from the source GitBook.
-- **MED3pa website.** The `MEDIA` section links to medomicslab.com because the
-  MED3pa site (`../MED3pa_website`) is not deployed yet. Add it once it has a URL.
 - **`README.md` cover image** is `cancer-ai.jpg`, inherited from the source GitBook.
   It is generic AI-in-medicine art, not MED3pa-specific — swap it if you have
   something better.

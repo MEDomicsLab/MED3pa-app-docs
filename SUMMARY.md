@@ -24,7 +24,8 @@
 
 ## MEDIA
 
-* [🏥 MEDomicsLab](https://www.medomicslab.com/)
+* [🏥 MED3pa website](https://www.med3pa.app/)
+* [🧪 MEDomicsLab](https://www.medomicslab.com/)
 * [🤖 GitHub — the app](https://github.com/Thedetektive/MED3paApp)
 * [📦 GitHub — the package](https://github.com/MEDomicsLab/MED3pa)
 * [📚 Package documentation](https://med3pa.readthedocs.io/en/latest/)

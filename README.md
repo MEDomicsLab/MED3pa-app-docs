@@ -60,6 +60,7 @@ The application wraps this in a three-step workflow — **Configure → Analyse 
 
 ### Quick documentation guide
 
+* For a high-level tour of the project, visit the [MED3pa website](https://www.med3pa.app/).
 * To download and install the application, go to the [next page](quick-start.md).
 * For the concepts behind the analysis (IPC, APC, MPC, declaration rate, profiles), read the [MED3pa page](med3pa/).
 * For tutorials, refer to the [Analysis](med3pa/analysis/) and [Deployment](deployment.md) pages.
