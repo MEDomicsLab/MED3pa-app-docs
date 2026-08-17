@@ -134,13 +134,13 @@ Be careful, the next steps are different depending on the user's privilege.
 Using HTTPS:
 
 ```zsh
-git clone https://github.com/Thedetektive/MED3paApp.git
+git clone https://github.com/MEDomicsLab/MED3pa-app.git
 ```
 
 Using SSH:
 
 ```zsh
-git clone git@github.com:Thedetektive/MED3paApp.git
+git clone git@github.com:MEDomicsLab/MED3pa-app.git
 ```
 
 #### 5. Backend Setup (Go) <a href="#id-5.-backend-setup-go" id="id-5.-backend-setup-go"></a>
