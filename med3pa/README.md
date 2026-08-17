@@ -1,5 +1,5 @@
 ---
-description: Brief introduction to Predictive Performance Precision Analysis
+description: Brief introduction to Predictive Performance Precision Analysis in Medicine
 cover: ../.gitbook/assets/cancer-ai.jpg
 coverY: 0
 ---
@@ -8,14 +8,14 @@ coverY: 0
 
 ### What is MED3pa?
 
-**MED3pa** stands for **P**redictive **P**erformance **P**recision **A**nalysis. It addresses a problem that standard model evaluation hides: a single aggregate score describes a population, not a patient.
+**MED3pa** stands for **P**redictive **P**erformance **P**recision **A**nalysis in **MED**icine. It addresses a problem that standard model evaluation hides: a single aggregate score describes a population, not a patient.
 
-A model reported at 0.87 AUC is not 0.87-accurate for everyone. It is excellent on the cases that resemble its training data, and unreliable on the rest — and nothing in the usual validation report tells a clinician which kind of patient is in front of them. MED3pa estimates that missing information: for every prediction, **how much can this particular prediction be trusted**, and for which **groups of patients** does the model fail systematically.
+A model reported at 0.87 AUC is not 0.87-accurate for everyone. It could excellent on the cases that resemble its training data, but unreliable on the rest and nothing in the usual validation report tells a clinician which kind of patient is in front of them. MED3pa estimates that missing information: for every prediction, **how much can this particular prediction be trusted**, and for which **groups of patients** does the model fail systematically.
 
 The method is described in the associated article published in the _Journal of the American Medical Informatics Association_: [https://doi.org/10.1093/jamia/ocag034](https://doi.org/10.1093/jamia/ocag034). The code used to produce the results in the article is available at [study\_3pa](https://github.com/MEDomicsLab/study_3pa).
 
 {% hint style="info" %}
-MED3pa does not train your predictive model. It analyses a **base model** you already have — trained anywhere, in any framework — together with an evaluation cohort. See [Base Models](data-and-models/base-models.md).
+MED3pa does not train your predictive model. It analyses a **base model** you already have trained anywhere, in any framework, put into a .pkl or .onnx file, together with an evaluation cohort. See [Base Models](data-and-models/base-models.md).
 {% endhint %}
 
 ### The typical workflow
@@ -32,7 +32,7 @@ MED3pa produces three confidence signals, all on a `[0, 1]` scale where 1 means 
 
 #### IPC — Individualized Predictive Confidence
 
-The IPC is a regressor trained to predict, **from a patient's features alone**, how well the base model did on that patient. The training target is a per-sample _confidence metric_ computed from the base model's probability and the true label — for example `1 − |ŷ − y|`, which is near 1 when the model was right and near 0 when it was confidently wrong.
+The IPC is a regressor trained to predict, **from a patient's features alone**, how well the base model did on that patient. The training target is a per-sample _confidence metric_ computed from the base model's probability and the true label. For example `1 − |ŷ − y|`, which is near 1 when the model was right and near 0 when it was confidently wrong.
 
 Because the IPC only reads features, it can be evaluated for a new patient whose true label is unknown. That is what makes deployment possible.
 
@@ -40,7 +40,7 @@ Because the IPC only reads features, it can be evaluated for a new patient whose
 
 The APC is a decision tree that partitions the cohort on the same features. Each leaf is a **profile**: a readable rule such as `age > 65 & lactate <= 2.4`. Every patient falling into a leaf inherits that leaf's aggregated confidence, and the base model's performance is recomputed inside each profile.
 
-This is what surfaces **disadvantaged profiles** — the groups where the base model consistently underperforms, which is exactly the information you need in order to refine a training set or retrain a model.
+This is what surfaces **disadvantaged profiles**, the groups where the base model consistently underperforms, which is exactly the information you need in order to refine a training set or retrain a model.
 
 <figure><img src="../.gitbook/assets/ApcTree.png" alt=""><figcaption><p>The APC profile tree; clicking a node shows the base model's performance inside that profile</p></figcaption></figure>
 

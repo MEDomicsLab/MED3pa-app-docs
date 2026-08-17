@@ -14,7 +14,7 @@ The Analysis Workspace is step 2. It loads one saved session and lets you explor
 
 Pick a session from the **📂 Session** selector at the top. A run launched from the Configuration page opens here automatically; older ones are reachable from this selector or from Session History.
 
-Once loaded, **⚙ Saved configuration** unfolds the exact settings the session was run with — base model, dataset, target column and every IPC / APC / MPC parameter. This is what makes two sessions comparable after the fact.
+Once loaded, **⚙ Saved configuration** unfolds the exact settings the session was run with: base model, dataset, target column and every IPC / APC / MPC parameter. This is what makes two sessions comparable after the fact.
 
 ### The three headline figures
 
@@ -39,9 +39,9 @@ Population kept is the size of the population at the operating point immediately
 
 ### 📈 Metrics by declaration rate
 
-The MDR chart draws each selected metric against the declaration rate; use the **Show metrics** panel on the left to choose which curves are drawn. A vertical marker follows the active DR.
+The MDR chart draws each selected metric against the declaration rate, a percentage of the population kept for which the base model is most confident with; use the **Show metrics** panel on the left to choose which curves are drawn. A vertical marker follows the active DR.
 
-Dots on the DR axis mark where each profile drops out of the tree — hover one for details. They use the same samples ratio as the tree beside them, so a dot marks exactly the point at which that profile greys out.
+Dots on the DR axis mark where each profile drops out of the tree, you can hover one for details. They use the same samples ratio as the tree beside them, so a dot marks exactly the point at which that profile greys out.
 
 ### 🌿 APC profile tree
 
@@ -53,12 +53,12 @@ The tree shows the profiles extracted by the APC. Controls above it:
 | **Min samples ratio** | Selects which profile set from the samples-ratio sweep is displayed |
 | **Show on nodes** | Prints the chosen metrics directly on each node |
 
-Profiles fade out when they are lost below the active DR. Clicking a node opens a detail dialog with the profile path, its node information — node %, population %, mean confidence level, positive % — and a bar per metric for the **base model's performance within that profile**. The ⤢ button expands the tree to full screen with the same controls.
+Profiles fade out when they are lost below the active DR. Clicking a node opens a detail dialog with the profile path, its node information, i.e. node %, population %, mean confidence level, positive %, and a bar per metric for the **base model's performance within that profile**. The ⤢ button expands the tree to full screen with the same controls.
 
 <figure><img src="../../.gitbook/assets/ApcTree.png" alt=""><figcaption><p>Expanded profile tree with a node's detail open; the two greyed-out nodes are lost at this DR</p></figcaption></figure>
 
 ### Creating a deployed model
 
-When the declaration rate is where you want it, click **▶ Create Model**. The dialog restates what is being frozen — the session, the base model, the declaration rate and the minimum confidence it corresponds to — and asks for a name.
+When the declaration rate is where you want it, click **▶ Create Model**.
 
 What is created is a **deployment**: the base model, the trained IPC and APC of that session, the MPC strategy, and the confidence threshold at the chosen DR. New patients whose confidence falls below that threshold will be flagged for human review rather than answered. The application then moves to the [Deployment](../../deployment.md) page.
