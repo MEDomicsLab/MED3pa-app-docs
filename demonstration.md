@@ -15,8 +15,8 @@ The scenario used throughout this documentation is an **ICU in-hospital mortalit
 ### The run, end to end
 
 1. **Import the cohort.** _Data & Models → Datasets → Import CSV…_ with the evaluation set. One row per stay, the feature columns the model expects, and a `deceased` column holding the outcome. See [Datasets](med3pa/data-and-models/datasets.md).
-2. **Import the model.** _Data & Models → Base models_, pointing at the exported classifier — `.onnx`, `.pkl` or `.joblib`. Declare its target column and the features in the order it expects them. See [Base Models](med3pa/data-and-models/base-models.md).
-3. **Configure.** On the Configuration page, select the model and the dataset, set the target column to `deceased`, and name the session. The prefilled confidence settings — random-forest IPC, an APC tree of depth 3, `minimum` as the MPC strategy — are a reasonable first pass. See [Configuration](med3pa/analysis/configuration.md).
+2. **Import the model.** _Data & Models → Base models_, pointing at the exported classifier (`.onnx`, `.pkl` or `.joblib`). Declare its target column and the features in the order it expects them. See [Base Models](med3pa/data-and-models/base-models.md).
+3. **Configure.** On the Configuration page, select the model and the dataset, set the target column to `deceased`, and name the session. The prefilled confidence settings (random-forest IPC, an APC tree of depth 3, `minimum` as the MPC strategy) are a reasonable first pass. See [Configuration](med3pa/analysis/configuration.md).
 4. **Run.** The progress bar reports each stage; the session opens in the Analysis Workspace when it completes.
 5. **Read the curves.** The MDR chart shows what the model's accuracy becomes as it is allowed to abstain. Move the declaration-rate slider and watch both numbers that matter: the metric, and the population kept. See [Analysis Workspace](med3pa/analysis/analysis-workspace.md).
 6. **Inspect the profiles.** Click nodes in the APC tree to see the base model's performance inside each profile. Nodes that grey out as the DR falls are profiles the model is uniformly unsure about.

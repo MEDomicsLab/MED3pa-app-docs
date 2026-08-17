@@ -1,6 +1,6 @@
 # Things to fill in
 
-This file is for maintainers, not readers — GitBook publishes the pages listed in
+This file is for maintainers, not readers; GitBook publishes the pages listed in
 `SUMMARY.md`, and this file is not one of them.
 
 ## Screenshots that do not exist yet
@@ -29,16 +29,16 @@ the page that wants it and what it should show. Drop a PNG at
 | `ApcTree.png` | website `tutos/apc-tree.png` | `med3pa/README.md`, `med3pa/analysis/analysis-workspace.md` |
 | `DataAndModels.png` | website `tutos/data-and-models.png` | `med3pa/data-and-models/base-models.md` |
 | `DeploymentPage.png` | website `tutos/deployment.png` | `deployment.md` |
-| `PatientLookup.png` | website `tutos/patient-lookup.png` | `patient-lookup.md` — it is the patient **detail** dashboard, not the search list |
+| `PatientLookup.png` | website `tutos/patient-lookup.png` | `patient-lookup.md`; it is the patient **detail** dashboard, not the search list |
 
 ## Videos
 
 Every video embed from the source GitBook was removed rather than left pointing at
 radiomics content. Two places are written to accept one when it exists:
 
-- `quick-start.md` — install walkthroughs per OS. There is no packaged installer
+- `quick-start.md`: install walkthroughs per OS. There is no packaged installer
   yet, so there is nothing to film until the first release.
-- `demonstration.md` — carries a written run-through and a warning hint that the
+- `demonstration.md`: carries a written run-through and a warning hint that the
   video is not available yet. Replace the hint with the embed.
 
 ## Links to confirm
@@ -50,7 +50,7 @@ radiomics content. Two places are written to accept one when it exists:
   source GitBook. Confirm it is the right one for MED3pa.
 - **Discord invite** in `SUMMARY.md` is the MEDomicsLab invite from the source GitBook.
 - **`README.md` cover image** is `cancer-ai.jpg`, inherited from the source GitBook.
-  It is generic AI-in-medicine art, not MED3pa-specific — swap it if you have
+  It is generic AI-in-medicine art, not MED3pa-specific, so swap it if you have
   something better.
 
 ## Assets
@@ -59,7 +59,7 @@ radiomics content. Two places are written to accept one when it exists:
 either MED3pa material copied from the website and the package, or generic
 material from the source GitBook that still applies (`cancer-ai.jpg`,
 `MEDomicsLab-Principles-1.png`, `NewIssue*.png`, `AffiliationsMartin.png`,
-`github-logo.png`, `linkedin-logo.png` — the last two are currently unused).
+`github-logo.png`, `linkedin-logo.png`; the last two are currently unused).
 
 `MED3paPackage.svg` and `MED3paSubpackage.svg` come from the package docs and have
 hard-coded white backgrounds, so they need a white container to look right in dark

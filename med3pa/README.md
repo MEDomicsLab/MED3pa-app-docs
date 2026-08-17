@@ -22,21 +22,21 @@ MED3pa does not train your predictive model. It analyses a **base model** you al
 
 An analysis always follows the same three stages, which are also the three steps of the interface:
 
-1. **Configure** — declare the base model, the evaluation dataset and the target column, then choose how confidence is to be estimated.
-2. **Analyse** — read the declaration-rate curves, explore the profile tree, and decide at which confidence level the model should be allowed to answer.
-3. **Deploy** — freeze that decision into a deployed model and apply it to new patients, who are then routed as _accept_, _caution_ or _flag for human audit_.
+1. **Configure**: declare the base model, the evaluation dataset and the target column, then choose how confidence is to be estimated.
+2. **Analyse**: read the declaration-rate curves, explore the profile tree, and decide at which confidence level the model should be allowed to answer.
+3. **Deploy**: freeze that decision into a deployed model and apply it to new patients, who are then routed as _accept_, _caution_ or _flag for human audit_.
 
 ### The three confidence estimators
 
 MED3pa produces three confidence signals, all on a `[0, 1]` scale where 1 means _trustworthy_.
 
-#### IPC — Individualized Predictive Confidence
+#### IPC: Individualized Predictive Confidence
 
 The IPC is a regressor trained to predict, **from a patient's features alone**, how well the base model did on that patient. The training target is a per-sample _confidence metric_ computed from the base model's probability and the true label. For example `1 − |ŷ − y|`, which is near 1 when the model was right and near 0 when it was confidently wrong.
 
 Because the IPC only reads features, it can be evaluated for a new patient whose true label is unknown. That is what makes deployment possible.
 
-#### APC — Aggregated Predictive Confidence
+#### APC: Aggregated Predictive Confidence
 
 The APC is a decision tree that partitions the cohort on the same features. Each leaf is a **profile**: a readable rule such as `age > 65 & lactate <= 2.4`. Every patient falling into a leaf inherits that leaf's aggregated confidence, and the base model's performance is recomputed inside each profile.
 
@@ -44,19 +44,19 @@ This is what surfaces **disadvantaged profiles**, the groups where the base mode
 
 <figure><img src="../.gitbook/assets/ApcTree.png" alt=""><figcaption><p>The APC profile tree; clicking a node shows the base model's performance inside that profile</p></figcaption></figure>
 
-#### MPC — Mixed Predictive Confidence
+#### MPC: Mixed Predictive Confidence
 
 The MPC combines the two into the single number used for the accept/reject decision:
 
-* **minimum** — `min(IPC, APC)`, conservative: a patient is trusted only when both the individual estimate and the profile agree;
-* **average** — `mean(IPC, APC)`, more permissive;
-* **custom** — any formula over `IPC` and `APC`, for example `0.6 * IPC + 0.4 * APC`.
+* **minimum** is `min(IPC, APC)`, conservative: a patient is trusted only when both the individual estimate and the profile agree;
+* **average** is `mean(IPC, APC)`, more permissive;
+* **custom** is any formula over `IPC` and `APC`, for example `0.6 * IPC + 0.4 * APC`.
 
 ### Declaration rate and the MDR curve
 
 The **declaration rate (DR)** is the share of predictions the model is allowed to make. At a given DR, only the patients whose MPC confidence clears the matching threshold are _declared_; the rest are withheld.
 
-Plotting each performance metric against the declaration rate gives the **MDR curve** — metrics by declaration rate. Read from right to left, it answers the question that matters when deploying a model: _what does the model's accuracy become if it is allowed to abstain on the least confident x% of cases, and how many patients does that abstention cost?_
+Plotting each performance metric against the declaration rate gives the **MDR curve**, metrics by declaration rate. Read from right to left, it answers the question that matters when deploying a model: _what does the model's accuracy become if it is allowed to abstain on the least confident x% of cases, and how many patients does that abstention cost?_
 
 <figure><img src="../.gitbook/assets/AnalysisWorkspace.png" alt=""><figcaption><p>Metrics by declaration rate, next to the APC profile tree</p></figcaption></figure>
 

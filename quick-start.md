@@ -17,7 +17,7 @@ MED3pa follows the same architecture as its [mother application](https://medomic
 ```
 Electron main (main/)      window, MongoDB lifecycle, Go server lifecycle, python env
         │  ipc
-Renderer (renderer/)       Next.js UI — the MED3pa pages + a thin app shell
+Renderer (renderer/)       Next.js UI: the MED3pa pages + a thin app shell
         │  HTTP :54388
 Go server (go_server/)     request dispatcher; spawns python scripts, streams progress
         │  stdin/stdout JSON
@@ -103,7 +103,7 @@ The MED3pa library is **not on PyPI**. `pythonEnv/requirements.txt` installs it 
 pip install -r pythonEnv/requirements.txt
 ```
 
-A helper script builds the whole conda environment in the right order — `numpy` has to be pinned before MED3pa is installed, otherwise pip pulls `numpy` 2.x and a `scipy` that conflicts with MED3pa's own `numpy<2.1.0` requirement:
+A helper script builds the whole conda environment in the right order; `numpy` has to be pinned before MED3pa is installed, otherwise pip pulls `numpy` 2.x and a `scipy` that conflicts with MED3pa's own `numpy<2.1.0` requirement:
 
 ```bash
 bash pythonEnv/create_conda_env.sh med3pa_app
@@ -435,7 +435,7 @@ npm install
 npm run dev
 ```
 
-`nextron` builds the renderer and launches Electron. On first launch you are asked to pick a **workspace folder** — this is where `DATA/` lives and where MongoDB stores its files.
+`nextron` builds the renderer and launches Electron. On first launch you are asked to pick a **workspace folder**; this is where `DATA/` lives and where MongoDB stores its files.
 
 #### Worth noting
 

@@ -15,7 +15,7 @@ MED3pa reads tabular cohorts. A dataset is a **CSV file** in which one row is on
 Once that is done, the file appears in the list and becomes selectable in the dataset pickers on the Configuration and Deployment pages.
 
 {% hint style="warning" %}
-Importing copies the file. Editing the original afterwards has no effect on the imported copy — re-import it instead.
+Importing copies the file. Editing the original afterwards has no effect on the imported copy; re-import it instead.
 {% endhint %}
 
 ### What the file must contain
@@ -23,7 +23,7 @@ Importing copies the file. Editing the original afterwards has no effect on the 
 | For | Requirement |
 | --- | --- |
 | **Analysis** | Every feature column the base model declares, plus the **target column** holding the true label (0/1) |
-| **Deployment (batch)** | Every feature column the deployed model declares. Ground truth is not needed — that is the point |
+| **Deployment (batch)** | Every feature column the deployed model declares. Ground truth is not needed; that is the point |
 | **Patient identification** | Optionally a patient-id column. If none is given, identifiers are generated |
 
 Column names must match those declared when the base model was imported, and are matched by name, not by position.

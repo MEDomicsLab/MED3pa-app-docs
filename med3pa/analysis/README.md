@@ -10,12 +10,12 @@ description: >-
 All confidence estimators, profile extraction and declaration-rate metrics are computed by the [MED3pa package](https://github.com/MEDomicsLab/MED3pa), the reference implementation of the method published in [JAMIA](https://doi.org/10.1093/jamia/ocag034).
 {% endhint %}
 
-An analysis is a single unit of work called a **session**. It is described entirely by the configuration you fill in, and everything it produces — the trained IPC and APC models, the metrics at every declaration rate, the profile tree, the lost profiles — is written to the local MongoDB under the session name and can be reopened at any time.
+An analysis is a single unit of work called a **session**. It is described entirely by the configuration you fill in, and everything it produces (the trained IPC and APC models, the metrics at every declaration rate, the profile tree, the lost profiles) is written to the local MongoDB under the session name and can be reopened at any time.
 
 The two upcoming sections cover the two halves of the workflow:
 
-* [**Configuration**](configuration.md) — declaring the inputs and the confidence settings, then running the experiment.
-* [**Analysis Workspace**](analysis-workspace.md) — reading the results and choosing the declaration rate to deploy at.
+* [**Configuration**](configuration.md): declaring the inputs and the confidence settings, then running the experiment.
+* [**Analysis Workspace**](analysis-workspace.md): reading the results and choosing the declaration rate to deploy at.
 
 ### Sessions
 

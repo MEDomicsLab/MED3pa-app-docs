@@ -6,8 +6,8 @@ There are two codebases, and which one to touch depends on the change:
 
 | Repository | What belongs there |
 | --- | --- |
-| [MED3paApp](https://github.com/Thedetektive/MED3paApp) | The desktop application — interface, Go dispatcher, Python glue scripts |
-| [MED3pa](https://github.com/MEDomicsLab/MED3pa) | The library — confidence estimators, profile extraction, declaration-rate metrics |
+| [MED3paApp](https://github.com/Thedetektive/MED3paApp) | The desktop application: interface, Go dispatcher, Python glue scripts |
+| [MED3pa](https://github.com/MEDomicsLab/MED3pa) | The library: confidence estimators, profile extraction, declaration-rate metrics |
 
 A change to how a confidence value is computed belongs in the package. A change to how it is configured or displayed belongs in the app.
 

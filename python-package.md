@@ -4,7 +4,7 @@ description: Using the MED3pa library directly, outside the application.
 
 # 🐍 The MED3pa package
 
-Everything the application computes is computed by the [MED3pa Python package](https://github.com/MEDomicsLab/MED3pa). The interface exists to make the method reachable without writing code; the package is there when you need to go further — batching many experiments, embedding the analysis in a pipeline, or extending the method itself.
+Everything the application computes is computed by the [MED3pa Python package](https://github.com/MEDomicsLab/MED3pa). The interface exists to make the method reachable without writing code; the package is there when you need to go further: batching many experiments, embedding the analysis in a pipeline, or extending the method itself.
 
 <figure><img src=".gitbook/assets/MED3paSubpackage.svg" alt=""><figcaption><p>The <code>med3pa</code> subpackage: IPC, APC and MPC models and the tree representation behind the profiles</p></figcaption></figure>
 
@@ -19,7 +19,7 @@ Everything the application computes is computed by the [MED3pa Python package](h
 ### Installation
 
 {% hint style="warning" %}
-The library is **not on PyPI**. The application pins it to a specific GitHub commit in `pythonEnv/requirements.txt`, and Python 3.12 is required — see [Quick start](quick-start.md#id-3.-python-environment).
+The library is **not on PyPI**. The application pins it to a specific GitHub commit in `pythonEnv/requirements.txt`, and Python 3.12 is required; see [Quick start](quick-start.md#id-3.-python-environment).
 {% endhint %}
 
 ```bash
@@ -60,7 +60,7 @@ visualize_mdr(result=results, filename='results/oym/mdr')
 visualize_tree(result=results, filename='results/oym/profiles')
 ```
 
-The `med3pa_params` dictionary holds the same settings the [Configuration](med3pa/analysis/configuration.md) page fills in — the IPC and APC hyperparameters, the MPC strategy and the samples-ratio sweep.
+The `med3pa_params` dictionary holds the same settings the [Configuration](med3pa/analysis/configuration.md) page fills in: the IPC and APC hyperparameters, the MPC strategy and the samples-ratio sweep.
 
 {% hint style="info" %}
 Passing a built-in confidence metric **by name** is known to raise a `TypeError` in the library. Pass the metric callable instead if you hit it. The application always passes callables, which is why the same configuration works there.
@@ -68,8 +68,8 @@ Passing a built-in confidence metric **by name** is known to raise a `TypeError`
 
 ### Going further
 
-* [Package documentation](https://med3pa.readthedocs.io/en/latest/) — tutorials for the `datasets`, `models` and `med3pa` subpackages.
-* [Examples](https://github.com/MEDomicsLab/MED3pa/tree/main/examples) — runnable notebooks, including a full one-year-mortality study.
-* [study\_3pa](https://github.com/MEDomicsLab/study_3pa) — the complete code behind the results reported in the JAMIA article.
+* [Package documentation](https://med3pa.readthedocs.io/en/latest/): tutorials for the `datasets`, `models` and `med3pa` subpackages.
+* [Examples](https://github.com/MEDomicsLab/MED3pa/tree/main/examples): runnable notebooks, including a full one-year-mortality study.
+* [study\_3pa](https://github.com/MEDomicsLab/study_3pa): the complete code behind the results reported in the JAMIA article.
 
 Please feel free to [contact us](forms/contact-us.md) if you need any further assistance :innocent:.

@@ -43,7 +43,7 @@ This application is part of the [MEDomics](https://medomics-udes.gitbook.io/medo
 
 The MED3pa-app is a graphical implementation of the MED3pa Python package. It enables the use of MED3pa's functionalities through an interactive interface: uncertainty estimation, discovery of the data profiles where a model underperforms, and declaration-rate driven deployment.
 
-Unlike the other MEDomics modules, MED3pa does **not** train a predictive model for you. It takes a model you already have — trained anywhere, exported as ONNX, pickle or joblib — and studies its behaviour on a cohort you provide.
+Unlike the other MEDomics modules, MED3pa does **not** train a predictive model for you. It takes a model you already have, trained anywhere and exported as ONNX, pickle or joblib, and studies its behaviour on a cohort you provide.
 
 <figure><img src=".gitbook/assets/MED3paPackage.svg" alt=""><figcaption><p>MED3pa package overview</p></figcaption></figure>
 
@@ -53,10 +53,10 @@ A model that reports 0.87 AUC on a test set reports one number for a whole popul
 
 * estimate, per patient, how much the base model's prediction can be trusted;
 * group patients into readable profiles and show where the model consistently underperforms;
-* let you choose a **declaration rate** — the share of predictions the model is allowed to make — and see exactly what performance that buys;
+* let you choose a **declaration rate**, the share of predictions the model is allowed to make, and see exactly what performance that buys;
 * deploy the model at that rate, so low-confidence cases are routed to a human instead of being answered.
 
-The application wraps this in a three-step workflow — **Configure → Analyse → Deploy** — and stores every run in a local database so results can be revisited, compared and applied to new patients.
+The application wraps this in a three-step workflow, **Configure → Analyse → Deploy**, and stores every run in a local database so results can be revisited, compared and applied to new patients.
 
 ### Quick documentation guide
 

@@ -8,7 +8,7 @@ description: >-
 
 The Analysis Workspace is step 2. It loads one saved session and lets you explore it; nothing here re-runs the experiment.
 
-<figure><img src="../../.gitbook/assets/AnalysisWorkspace.png" alt=""><figcaption><p><em>Analysis Workspace</em> — declaration-rate slider, MDR curves and APC profile tree</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/AnalysisWorkspace.png" alt=""><figcaption><p><em>Analysis Workspace</em>: declaration-rate slider, MDR curves and APC profile tree</p></figcaption></figure>
 
 ### Loading a session
 
@@ -30,8 +30,8 @@ The metric behind the last two cards is chosen from the dropdown inside the card
 
 The slider sets the **active DR threshold**, and everything below it reacts. Alongside it the page reports:
 
-* **min confidence** — the MPC value a patient must reach to be declared at this rate;
-* **population kept** — the share of the cohort that actually clears that threshold.
+* **min confidence**: the MPC value a patient must reach to be declared at this rate;
+* **population kept**: the share of the cohort that actually clears that threshold.
 
 {% hint style="info" %}
 Population kept is the size of the population at the operating point immediately below the current threshold, so it reflects what is really retained rather than the nominal rate. The metrics displayed beside it are computed on the at-or-above population, so the two describe slightly different sets of patients.

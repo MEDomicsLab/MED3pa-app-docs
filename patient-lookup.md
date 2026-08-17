@@ -8,13 +8,13 @@ Every patient a deployed model has scanned is kept in the workspace database. Th
 
 ### Searching
 
-Enter a patient identifier — or leave the box empty to list everything — and press **Search**. Each result card summarises one scan: the base model prediction, the MPC confidence, the action recommendation, the profile the patient fell into, and which deployed model produced it.
+Enter a patient identifier, or leave the box empty to list everything, and press **Search**. Each result card summarises one scan: the base model prediction, the MPC confidence, the action recommendation, the profile the patient fell into, and which deployed model produced it.
 
 Clicking a card opens the patient's dashboard.
 
 ### The patient dashboard
 
-<figure><img src=".gitbook/assets/PatientLookup.png" alt=""><figcaption><p>Patient dashboard — recommendation banner, confidence decomposition and base model output</p></figcaption></figure>
+<figure><img src=".gitbook/assets/PatientLookup.png" alt=""><figcaption><p>Patient dashboard: recommendation banner, confidence decomposition and base model output</p></figcaption></figure>
 
 The dashboard answers, for one patient, why the model was or was not trusted.
 
@@ -22,11 +22,11 @@ The dashboard answers, for one patient, why the model was or was not trusted.
 
 | Banner | Meaning |
 | --- | --- |
-| ✓ **Accept — reliable prediction** | Confidence clears the declaration-rate threshold and the patient is not in a flagged profile |
-| ⚠ **Caution — weak profile** | Individual confidence clears the threshold, but this patient belongs to a profile the base model handles poorly |
-| ⛔ **Reject — low confidence** | Predicted confidence is below the threshold; withhold the base model prediction and review manually |
+| ✓ **Accept: reliable prediction** | Confidence clears the declaration-rate threshold and the patient is not in a flagged profile |
+| ⚠ **Caution: weak profile** | Individual confidence clears the threshold, but this patient belongs to a profile the base model handles poorly |
+| ⛔ **Reject: low confidence** | Predicted confidence is below the threshold; withhold the base model prediction and review manually |
 
-**Headline figures.** The deployed model and its declaration rate; the MPC confidence against the threshold; and the APC profile membership, together with the lowest declaration rate at which this patient would still have been declared — a direct measure of how marginal the case is.
+**Headline figures.** The deployed model and its declaration rate; the MPC confidence against the threshold; and the APC profile membership, together with the lowest declaration rate at which this patient would still have been declared, a direct measure of how marginal the case is.
 
 **Confidence decomposition.** IPC, APC and MPC drawn as bars against the deployment threshold, so it is immediately visible whether an individual estimate or a weak profile is what pushed the patient below the line.
 

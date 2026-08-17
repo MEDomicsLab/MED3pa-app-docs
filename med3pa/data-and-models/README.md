@@ -7,7 +7,7 @@ description: >-
 
 # Data & Models
 
-The **Data & Models** button in the header opens a single panel with two tabs — one per kind of input:
+The **Data & Models** button in the header opens a single panel with two tabs, one per kind of input:
 
 | Tab | What it holds |
 | --- | --- |
@@ -17,5 +17,5 @@ The **Data & Models** button in the header opens a single panel with two tabs �
 Nothing on the [Configuration](../analysis/configuration.md) page can be selected until it has been imported here first.
 
 {% hint style="info" %}
-Both kinds of object live in the workspace folder, not in the application. Moving to a different workspace gives you a different set of datasets, models, sessions and deployments — which is a convenient way to keep separate studies apart.
+Both kinds of object live in the workspace folder, not in the application. Moving to a different workspace gives you a different set of datasets, models, sessions and deployments, which is a convenient way to keep separate studies apart.
 {% endhint %}

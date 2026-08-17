@@ -8,7 +8,7 @@ description: >-
 
 The Configuration page is step 1 of the workflow. Its left column declares **what** is being analysed; its right column declares **how** confidence is estimated.
 
-<figure><img src="../../.gitbook/assets/ConfigurationPage.png" alt=""><figcaption><p><em>Configuration</em> page — inputs on the left, confidence method on the right</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/ConfigurationPage.png" alt=""><figcaption><p><em>Configuration</em> page: inputs on the left, confidence method on the right</p></figcaption></figure>
 
 ## Inputs
 
@@ -16,8 +16,8 @@ The Configuration page is step 1 of the workflow. Its left column declares **wha
 
 Two mutually exclusive sources are offered:
 
-* **Base model** — an imported `.medmodel` (see [Base Models](../data-and-models/base-models.md)). MED3pa calls it to obtain a probability per patient.
-* **Predicted probabilities** — a column of the chosen dataset that already holds the predicted probability of the positive class, plus the **decision threshold** above which a prediction counts as positive. Use this when the model that produced them lives outside the application.
+* **Base model**: an imported `.medmodel` (see [Base Models](../data-and-models/base-models.md)). MED3pa calls it to obtain a probability per patient.
+* **Predicted probabilities**: a column of the chosen dataset that already holds the predicted probability of the positive class, plus the **decision threshold** above which a prediction counts as positive. Use this when the model that produced them lives outside the application.
 
 ### Dataset, target and session
 
@@ -31,7 +31,7 @@ Two mutually exclusive sources are offered:
 
 Four collapsible sections hold the rest. Every field carries a ⓘ hover hint in the interface; the tables below repeat them.
 
-### IPC — Individualized Predictive Confidence
+### IPC: Individualized Predictive Confidence
 
 Hyperparameters of the regressor that learns to predict, from a patient's features alone, how much the base model can be trusted for that patient.
 
@@ -46,7 +46,7 @@ Hyperparameters of the regressor that learns to predict, from a patient's featur
 | Option | Formula |
 | --- | --- |
 | **Sigmoidal** _(default)_ | `1 / (1 + e^(10·ln3·(|yᵢ − ŷᵢ| − |t − yᵢ|)))` |
-| **Absolute** | `1 − |ŷᵢ − yᵢ|` — near 1 when the model was right about a patient, near 0 when it was confidently wrong |
+| **Absolute** | `1 − |ŷᵢ − yᵢ|` is near 1 when the model was right about a patient, near 0 when it was confidently wrong |
 | **Custom function** | Any expression `f(p, y)` you write |
 
 {% hint style="info" %}
@@ -58,7 +58,7 @@ A custom expression may use the variables `p` (predicted probability), `y` (true
 | Value | Notes |
 | --- | --- |
 | `RandomForestRegressor` | The default |
-| `EnsembleRandomForestRegressor` | Cannot be grid-searched — see the warning below |
+| `EnsembleRandomForestRegressor` | Cannot be grid-searched; see the warning below |
 | `DecisionTreeRegressor` | Not a forest, so `n_estimators` does not apply and the field is hidden |
 
 {% hint style="warning" %}
@@ -67,7 +67,7 @@ MED3pa cannot grid-search an ensemble of random forests: its optimizer stores th
 
 **Grid-search ranges** run a cross-validated search instead of training directly. Leave every field blank to skip the search; filling in any one field turns it on. Values are comma-separated, e.g. `50, 100, 200` for `n_estimators`, `2, 3, 4, 5` for `max_depth`, `1, 2, 4` for `min_samples_leaf`.
 
-### APC — Aggregated Predictive Confidence
+### APC: Aggregated Predictive Confidence
 
 Hyperparameters of the decision tree that splits patients into profiles.
 
@@ -79,13 +79,13 @@ Hyperparameters of the decision tree that splits patients into profiles.
 
 The APC has its own grid-search fields, with the same semantics as the IPC's.
 
-### MPC — Mixed Predictive Confidence
+### MPC: Mixed Predictive Confidence
 
 How the per-patient IPC and per-profile APC confidences combine into the single value used for declaration:
 
 | Strategy | Formula | Behaviour |
 | --- | --- | --- |
-| **Minimum** _(default)_ | `min(IPC, APC)` | Conservative — a patient is trusted only when both agree |
+| **Minimum** _(default)_ | `min(IPC, APC)` | Conservative; a patient is trusted only when both agree |
 | **Average** | `mean(IPC, APC)` | More permissive |
 | **Custom function** | `f(IPC, APC)` | Lets you weight them, e.g. `0.6 * IPC + 0.4 * APC` |
 
@@ -95,7 +95,7 @@ Custom expressions accept the variables `IPC` and `APC` and the same function se
 
 | Field | Prefilled | Description |
 | --- | --- | --- |
-| **Samples ratio sweep** — min / max / step | 0 / 10 / 5 | The smallest share of the cohort a profile must cover to be reported, as a percentage. The experiment repeats profile extraction at every value from min to max, so you obtain profile sets at several levels of granularity rather than just one. `0` keeps every profile, however small; smaller steps give more profile sets and a longer run |
+| **Samples ratio sweep** (min / max / step) | 0 / 10 / 5 | The smallest share of the cohort a profile must cover to be reported, as a percentage. The experiment repeats profile extraction at every value from min to max, so you obtain profile sets at several levels of granularity rather than just one. `0` keeps every profile, however small; smaller steps give more profile sets and a longer run |
 | **Evaluate models** | on | Also score the IPC and APC models themselves and store the result under `models_evaluation`. Adds to the runtime, and is useful for checking that the confidence models actually fit |
 
 ## Running
@@ -103,5 +103,5 @@ Custom expressions accept the variables `IPC` and `APC` and the same function se
 Click **⚡ Run Analysis**. A progress bar reports each stage as the Go server streams it back from the Python process. When the run finishes, the application saves the session and switches straight to the [Analysis Workspace](analysis-workspace.md) with it loaded.
 
 {% hint style="warning" %}
-A run that fails immediately is almost always an environment problem rather than a configuration one. Check the Python interpreter on the System page — it must have MED3pa installed. See [Quick start](../../quick-start.md#id-3.-python-environment).
+A run that fails immediately is almost always an environment problem rather than a configuration one. Check the Python interpreter on the System page; it must have MED3pa installed. See [Quick start](../../quick-start.md#id-3.-python-environment).
 {% endhint %}
