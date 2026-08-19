@@ -2,6 +2,8 @@
 
 As **MED3pa-app** has not yet been officially released, the [**Quick Start**](quick-start.md) guide also serves as the contribution guide.
 
+MED3pa is one application of the MEDomics platform, and follows its conventions: branching model, commit naming, pull-request expectations and code review. They are documented once, for every module, in the [MEDomicsLab contributing guide](https://medomicslab.gitbook.io/medomics-docs/contributing).
+
 There are two codebases, and which one to touch depends on the change:
 
 | Repository | What belongs there |
