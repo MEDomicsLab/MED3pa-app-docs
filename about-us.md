@@ -17,7 +17,7 @@
         <td><a href="https://www.medomicslab.com/">https://www.medomicslab.com/</a><img src=".gitbook/assets/AffiliationsMartin.png" alt=""></td>
     </tr>
     <tr>
-        <td><img src=".gitbook\assets\Thanh-Tri.jpg" alt="" data-size="original"></td>
+        <td><img src=".gitbook/assets/Thanh-Tri.jpg" alt="" data-size="original"></td>
         <td><h2><strong>Thanh-Tri Nguyen</strong></h2></td>
         <td>Undergraduate, Bioengineering</td>
         <td>McGill University</td>
