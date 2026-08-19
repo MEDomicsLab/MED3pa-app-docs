@@ -2,7 +2,32 @@
 
 ## :pilot: About us
 
-<table data-card-size="large" data-view="cards"><thead><tr><th></th><th></th><th></th><th></th><th></th><th></th><th data-type="content-ref"></th><th></th></tr></thead><tbody><tr><td><img src=".gitbook/assets/MartinV.png" alt="" data-size="original"></td><td><h2><strong>Martin Vallières, PhD</strong></h2></td><td>Associate Professor, Department of Oncology</td><td>McGill University</td><td>Researcher – CRCHUS</td><td>Canada CIFAR AI Chair, Mila</td><td></td><td><a href="https://www.medomicslab.com/">https://www.medomicslab.com/</a><img src=".gitbook/assets/AffiliationsMartin.png" alt=""></td></tr></tbody></table>
+<table data-card-size="large" data-view="cards">
+<thead><tr><th></th><th></th><th></th><th></th><th></th><th></th><th data-type="content-ref"></th><th></th></tr></thead>
+
+<tbody>
+    <tr>
+        <td><img src=".gitbook/assets/MartinV.png" alt="" data-size="original"></td>
+        <td><h2><strong>Martin Vallières, PhD</strong></h2></td>
+        <td>Associate Professor, Department of Oncology</td>
+        <td>McGill University</td>
+        <td>Researcher – CRCHUS</td>
+        <td>Canada CIFAR AI Chair, Mila</td>
+        <td></td>
+        <td><a href="https://www.medomicslab.com/">https://www.medomicslab.com/</a><img src=".gitbook/assets/AffiliationsMartin.png" alt=""></td>
+    </tr>
+    <tr>
+        <td><img src=".gitbook\assets\Thanh-Tri.jpg" alt="" data-size="original"></td>
+        <td><h2><strong>Thanh-Tri Nguyen</strong></h2></td>
+        <td>Undergraduate, Bioengineering</td>
+        <td>McGill University</td>
+        <td>Researcher – Medical Physics Unit - RIMUHC</td>
+        <td></td>
+        <!-- <td><a href="https://www.medomicslab.com/">https://www.medomicslab.com/</a><img src=".gitbook/assets/AffiliationsMartin.png" alt=""></td> -->
+    </tr>
+</tbody>
+
+</table>
 
 <!-- ### 👩‍💻 Development team <a href="#development-team" id="development-team"></a>
 
