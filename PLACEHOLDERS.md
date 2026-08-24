@@ -38,8 +38,22 @@ radiomics content. Two places are written to accept one when it exists:
 
 - `quick-start.md`: install walkthroughs per OS. There is no packaged installer
   yet, so there is nothing to film until the first release.
-- `demonstration.md`: carries a written run-through and a warning hint that the
-  video is not available yet. Replace the hint with the embed.
+- `demonstration/`: the proof of concept is written out stage by stage. A video
+  would sit naturally at the top of `demonstration/README.md`.
+
+## The MIMIC-95 proof of concept
+
+`demonstration/` is a five-stage walkthrough with 32 figures. Every figure is a
+generated placeholder at `.gitbook/assets/demo/`, named for what it should show
+(`18-mdr-curve.png`, `26-predictions-table.png`, and so on). Replace a file with
+the real screenshot, keeping the name, and the page picks it up with no edit.
+
+Two other things are pending there, both listed on the page itself:
+
+- The **data dictionary** in `demonstration/README.md` has one row per MIMIC-95
+  column with the description left as `_fill in_`.
+- The run's own figures are `{{TOKENS}}` in double braces. The table at the
+  bottom of `demonstration/README.md` names every one of them.
 
 ## Links to confirm
 

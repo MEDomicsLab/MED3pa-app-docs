@@ -13,7 +13,12 @@
 * [🚀 Deployment](deployment.md)
 * [🔎 Patient lookup](patient-lookup.md)
 * [🐍 The MED3pa package](python-package.md)
-* [🕹️ Demonstration](demonstration.md)
+* [🕹️ Demonstration](demonstration/README.md)
+  * [Workspace and inputs](demonstration/setup.md)
+  * [Configuring the run](demonstration/configuration.md)
+  * [Reading the results](demonstration/analysis.md)
+  * [Deploying and applying](demonstration/deployment.md)
+  * [One patient in detail](demonstration/patient.md)
 * [👩‍💻 Contributing](contributing.md)
 * [🤓 About us](about-us.md)
 
