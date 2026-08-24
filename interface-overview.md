@@ -56,6 +56,8 @@ The System page displays and controls everything the application needs in order 
 * **MongoDB status**: running or stopped, on which port, plus a first-time setup helper.
 * **Bundled Python**: whether the app ships its own interpreter, and the list of packages installed in it.
 
+<figure><img src=".gitbook/assets/SettingsPage.png" alt=""><figcaption><p>System page: server status and ports, the Python interpreter, the seed, and the bundled packages</p></figcaption></figure>
+
 {% hint style="warning" %}
 If an analysis fails immediately, the Python environment is the first thing to check. The Go server needs an interpreter with MED3pa installed; without one, every request fails before the analysis starts.
 {% endhint %}

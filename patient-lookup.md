@@ -34,6 +34,8 @@ The dashboard answers, for one patient, why the model was or was not trusted.
 
 **MDR curve and profile tree.** The same two charts as the [Analysis Workspace](med3pa/analysis/analysis-workspace.md), reproduced for this patient: the chart marks the deployed DR and the highest DR at which this patient would still be declared, and the tree highlights the patient's profile chain from the root down to their leaf.
 
+**Clinical data.** The feature values the prediction was made from, one tile per column, exactly as they were submitted. This is what makes the page auditable rather than merely informative: a reviewer handed a flagged prediction can see the inputs, the profile those inputs put the patient in, and the two confidence estimates that followed, without leaving the screen. It reads _No clinical data recorded for this patient_ when the record carries none.
+
 ### Session History
 
 The sibling page, **Session History**, is the equivalent log for analyses rather than patients: date, session name, base model, dataset, target column, cohort size and status for every run saved in this workspace. Clicking a row reopens that session in the Analysis Workspace.

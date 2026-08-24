@@ -1,50 +1,41 @@
 ---
 description: >-
-  A proof of concept taking one ICU mortality model through the whole MED3pa
+  A proof of concept taking a hospital mortality model through the whole MED3pa
   pipeline, from an unopened workspace to a deployed model answering for new
   patients.
 ---
 
 # 🕹️ Demonstration
 
-This is **proof of concept 1** for the MED3pa application: a complete run over the **MIMIC-95** cohort, one stage per page, with every screen shown.
+This is **proof of concept 1** for the MED3pa application: a complete run over a hospital cohort of 2,473 stays, one stage per page, with the real screens shown throughout.
 
 Unlike the other MEDomics proofs of concept, nothing here trains a predictive model. The model already exists. What this walkthrough produces is an answer to a different question: **for which patients can that model be believed, and what does it cost to make it stay quiet about the rest?**
 
 ## About the dataset
 
-**MIMIC-95** is a tabular ICU cohort derived from [MIMIC](https://mimic.mit.edu/). One row is one stay. Sixteen columns are used: fifteen features and the outcome.
+The cohort is a wide tabular extract, one row per hospital stay. `Holdout_h1_encoded.csv` carries **2,473 stays** across **245 columns**: 244 features and the outcome.
 
-| Column | What it holds | Role |
+| Group | Count | Examples |
 | --- | --- | --- |
-| `deceased` | _fill in_ | **Target**, binary |
-| `age` | _fill in_ | Feature |
-| `pao2fio2` | _fill in_ | Feature |
-| `uo` | _fill in_ | Feature |
-| `admissiontype` | _fill in_ | Feature |
-| `bicarbonate` | _fill in_ | Feature |
-| `bilirubin` | _fill in_ | Feature |
-| `bun` | _fill in_ | Feature |
-| `chron_dis` | _fill in_ | Feature |
-| `gcs` | _fill in_ | Feature |
-| `hr` | _fill in_ | Feature |
-| `potassium` | _fill in_ | Feature |
-| `sbp` | _fill in_ | Feature |
-| `sodium` | _fill in_ | Feature |
-| `tempc` | _fill in_ | Feature |
-| `wbc` | _fill in_ | Feature |
+| `adm_*` | 147 | `adm_lung_cancer`, `adm_pneumonia`, `adm_anemia` |
+| `dx_*` | 84 | `dx_metastatic_solid_cancer`, `dx_chronic_resp_failure`, `dx_home_o2` |
+| `is_*` | 3 | `is_ambulance`, `is_icu_start_ho`, `is_urg_readm` |
+| Encounter and demographic | 9 | `age_original`, `ed_visit_count`, `ho_ambulance_count`, `total_duration`, `has_dx`, `gender`, `flu_season`, `living_status`, `admission_group`, `service_group` |
+| **Outcome** | 1 | `oym` |
 
-{% hint style="info" %}
-MED3pa never interprets a feature. It reads the columns as numbers, and the only place their names surface is in the profile rules the APC tree produces, which is exactly where a clinical reading matters. Filling in the table above is therefore worth the effort: a rule such as `gcs <= 8 & age > 70` is only actionable to a reader who knows what `gcs` is.
+Everything is numerically encoded already, which matters at the far end of the pipeline: the single-patient form on the Deployment page builds numeric input fields, so a column holding text could not be typed into it.
+
+{% hint style="warning" %}
+**To fill in:** what `oym` records, where the extract comes from, and how the binary outcome is defined. The walkthrough deliberately does not guess.
 {% endhint %}
 
-{% hint style="danger" %}
-Any categorical column has to be **numerically encoded in the CSV**, `admissiontype` included. The single-patient form on the Deployment page builds numeric input fields from the model's feature list, so a column holding text cannot be typed into it.
+{% hint style="info" %}
+MED3pa never interprets a feature. It reads the columns as numbers, and the only place their names surface is in the profile rules the APC tree produces, which is exactly where a clinical reading matters. A rule such as `age_original <= 77.5 & adm_lung_cancer > 0.5`, which is one this run really produced, is only actionable to a reader who knows what those columns hold.
 {% endhint %}
 
 ## Goal
 
-This proof of concept shows how an existing ICU mortality model can be audited and deployed with the MED3pa application. Concretely, by the end of the walkthrough you will have:
+This proof of concept shows how an existing mortality model can be audited and deployed with the MED3pa application. Concretely, by the end of the walkthrough you will have:
 
 * imported a cohort and an externally trained model into a workspace;
 * estimated per patient and per profile how much that model can be trusted;
@@ -53,9 +44,11 @@ This proof of concept shows how an existing ICU mortality model can be audited a
 * frozen a declaration rate into a deployed model, and applied it to patients it has never seen;
 * opened one patient and read the whole chain of reasoning behind their routing.
 
-{% hint style="info" %}
-The settings used throughout are the ones the application prefills. They are a deliberate starting point rather than a tuned configuration, so the walkthrough is reproducible: follow it with your own cohort and model, and only the numbers change.
+{% hint style="warning" %}
+**The figures come from two runs of the same pipeline.** Stages 1 to 3 show `session1`, built on a pickled `BaggingClassifier`; stages 4 and 5 show the deployment `medpa_model2`, built from `session3` on an ONNX random forest, `homr_oym_rf`. The pipeline is identical either way, and each page says which run its figures belong to. Consolidating the walkthrough onto a single run is a matter of re-shooting a handful of screens.
 {% endhint %}
+
+The confidence settings are the ones the application prefills. They are a deliberate starting point rather than a tuned configuration, so the walkthrough is reproducible: follow it with your own cohort and model, and only the numbers change.
 
 ## Steps
 
@@ -63,13 +56,13 @@ The settings used throughout are the ones the application prefills. They are a d
 {% step %}
 ### [Workspace and inputs](setup.md)
 
-Open a workspace, import the MIMIC-95 CSV, and import the base model with its feature list and target.
+Open a workspace, import the cohort, and import the base model with its feature list and target.
 {% endstep %}
 
 {% step %}
 ### [Configuring the run](configuration.md)
 
-Point MED3pa at the model, the cohort and the `deceased` column, then set how confidence is to be estimated.
+Point MED3pa at the model, the cohort and the `oym` column, then set how confidence is to be estimated.
 {% endstep %}
 
 {% step %}
@@ -81,45 +74,21 @@ Work through the declaration-rate curve and the profile tree, and choose the rat
 {% step %}
 ### [Deploying and applying](deployment.md)
 
-Freeze the session into a deployed model and run it over new patients, in batch and one at a time.
+Freeze the session into a deployed model and run it over new patients.
 {% endstep %}
 
 {% step %}
 ### [One patient in detail](patient.md)
 
-Look a patient up and read why their prediction was accepted, flagged for caution, or withheld.
+Look a patient up and read why their prediction was accepted or withheld.
 {% endstep %}
 {% endstepper %}
 
-## What to fill in
+## Still to come
 
-The walkthrough is written with the run's own figures left as tokens in double braces, so the prose can be completed in one pass once the analysis has been run. Every token appears in the table below.
+Sixteen screens have not been captured yet. Until they are, those figures show a placeholder card naming what belongs there, and the surrounding text says plainly that the figure is missing rather than describing something the reader cannot see. The list is in `PLACEHOLDERS.md` at the root of this repository.
 
-| Token | Meaning |
-| --- | --- |
-| `{{N_PATIENTS}}` | Rows in the MIMIC-95 cohort used for the analysis |
-| `{{MODEL_FILE}}` | File name of the base model, with its extension |
-| `{{MODEL_ALGORITHM}}` | What the base model is, e.g. a random forest |
-| `{{THRESHOLD}}` | The model's decision threshold, if not `0.5` |
-| `{{SESSION_NAME}}` | Name given to the analysis session |
-| `{{AUC_FULL}}` | AUC over the whole cohort, at declaration rate 100% |
-| `{{SUGGESTED_DR}}` | Declaration rate the application suggests for the chosen metric |
-| `{{AUC_AT_DR}}` | AUC at that declaration rate |
-| `{{IMPROVEMENT}}` | Gain reported on the "Improvement at optimal DR" card |
-| `{{CHOSEN_DR}}` | Declaration rate actually deployed, if different from the suggestion |
-| `{{MIN_CONFIDENCE}}` | Minimum confidence matching the chosen rate |
-| `{{POPULATION_KEPT}}` | Share of the cohort still answered for at that rate |
-| `{{PROFILE_RULE_1}}`, `{{PROFILE_RULE_2}}` | Two profile rules worth discussing, one weak and one strong |
-| `{{PROFILE_1_METRIC}}`, `{{PROFILE_2_METRIC}}` | The base model's performance inside each of them |
-| `{{LOST_PROFILE_RULE}}`, `{{LOST_PROFILE_DR}}` | A profile that drops out, and the rate at which it goes |
-| `{{DEPLOYMENT_NAME}}` | Name given to the deployed model |
-| `{{HOLDOUT_FILE}}`, `{{N_HOLDOUT}}` | The held-out cohort the deployed model is applied to, and its size |
-| `{{N_ACCEPT}}`, `{{N_CAUTION}}`, `{{N_FLAG}}` | How the batch split across the three routing outcomes |
-| `{{PATIENT_ID}}` | The patient opened in the last stage |
-| `{{PATIENT_PROB}}`, `{{PATIENT_IPC}}`, `{{PATIENT_APC}}`, `{{PATIENT_MPC}}` | That patient's base probability and three confidence values |
-| `{{PATIENT_PROFILE}}`, `{{PATIENT_ROUTING}}` | The profile they fall into and how they were routed |
-
-Screenshots are placeholders. Each one is a real file at `.gitbook/assets/demo/`, named for the figure it stands in for; replacing the file with the actual screenshot, keeping the name, needs no edit to any page.
+Two numbers are also still open, both on the [analysis page](analysis.md): the base model's performance inside individual profiles, which needs a node-detail screenshot, and the rate at which the first profile drops out of the tree.
 
 ## Beyond the application
 

@@ -14,7 +14,6 @@ the page that wants it and what it should show. Drop a PNG at
 |---|---|---|
 | `OpeningPage.png` | `interface-overview.md` → Opening page | The workspace gate: "Choose a workspace folder to begin", with the Recent list |
 | `AppHeader.png` | `interface-overview.md` → Header | The header bar: workspace path, server status light, Data & Models, System, Change workspace |
-| `SettingsPage.png` | `interface-overview.md` → System page | The System page: Go server status, python environment path, seed, MongoDB status |
 | `OverviewPage.png` | `interface-overview.md` → The MED3pa module | The Overview dashboard: the three KPI cards and the recent-activity feed |
 | `DatasetImport.png` | `med3pa/data-and-models/datasets.md` | The Datasets tab of the Data & Models panel with a few imported CSVs listed |
 | `SessionHistory.png` | `patient-lookup.md` → Session History | The session log table |
@@ -30,6 +29,7 @@ the page that wants it and what it should show. Drop a PNG at
 | `DataAndModels.png` | website `tutos/data-and-models.png` | `med3pa/data-and-models/base-models.md` |
 | `DeploymentPage.png` | website `tutos/deployment.png` | `deployment.md` |
 | `PatientLookup.png` | website `tutos/patient-lookup.png` | `patient-lookup.md`; it is the patient **detail** dashboard, not the search list |
+| `SettingsPage.png` | cropped from `proof of concept 3` | `interface-overview.md` → System page |
 
 ## Videos
 
@@ -41,19 +41,40 @@ radiomics content. Two places are written to accept one when it exists:
 - `demonstration/`: the proof of concept is written out stage by stage. A video
   would sit naturally at the top of `demonstration/README.md`.
 
-## The MIMIC-95 proof of concept
+## The proof of concept
 
-`demonstration/` is a five-stage walkthrough with 32 figures. Every figure is a
-generated placeholder at `.gitbook/assets/demo/`, named for what it should show
-(`18-mdr-curve.png`, `26-predictions-table.png`, and so on). Replace a file with
-the real screenshot, keeping the name, and the page picks it up with no edit.
+`demonstration/` is a five-stage walkthrough with 33 figures, all under
+`.gitbook/assets/demo/`. Seventeen are real, cropped from the captures in
+`proof of concept 3`. Sixteen are still generated placeholder cards; each of those
+figures has a caption ending "Screenshot not captured yet", and the surrounding
+prose is written so it never describes something the reader cannot see. Replace a
+file with the real screenshot, keeping the name, and the page picks it up with no
+edit; then drop that sentence from the caption.
 
-Two other things are pending there, both listed on the page itself:
+Still to capture:
 
-- The **data dictionary** in `demonstration/README.md` has one row per MIMIC-95
-  column with the description left as `_fill in_`.
-- The run's own figures are `{{TOKENS}}` in double braces. The table at the
-  bottom of `demonstration/README.md` names every one of them.
+| File | Page | Should show |
+|---|---|---|
+| `01-workspace-gate.png` | setup | The workspace gate before a folder is chosen |
+| `02-header.png` | setup | The header bar once a workspace is open |
+| `04-datasets-list.png` | setup | The Datasets tab with the cohorts listed after import |
+| `07-model-imported.png` | setup | The base model under "Already imported" |
+| `12-apc-settings.png` | configuration | The APC section expanded |
+| `13-run-progress.png` | configuration | MPC and experiment settings, plus the progress bar mid-run |
+| `14-session-loaded.png` | analysis | The session selector with a session loaded |
+| `15-saved-config.png` | analysis | "Saved configuration" unfolded |
+| `17-dr-100.png` | analysis | The DR slider at 100% |
+| `18-mdr-curve.png` | analysis | The MDR curve, undimmed and with no dialog over it |
+| `19-mdr-at-dr.png` | analysis | The curve at the deployed rate, with lost-profile markers |
+| `20-tree-full.png` | analysis | The APC tree at DR 100% |
+| `21-tree-faded.png` | analysis | The same tree at the deployed rate, profiles faded |
+| `22-node-detail.png` | analysis | A node's detail dialog, showing per-profile metrics |
+| `27-single-patient.png` | deployment | The single-patient manual entry tab |
+| `32-session-history.png` | patient | The Session History table |
+
+The analysis page carries the two facts that depend on those captures: the
+per-profile performance figures (needs `22`) and the rate at which the first
+profile drops out (needs `19`).
 
 ## Links to confirm
 
