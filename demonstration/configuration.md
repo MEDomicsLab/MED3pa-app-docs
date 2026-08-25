@@ -10,7 +10,7 @@ Step 1 of the workflow. The left column of the Configuration page says **what** 
 
 ## Declaring the inputs
 
-The **baseline prediction model** is where the audit begins. Two sources are offered, and this demo uses the first: the `.medmodel` imported in the previous stage. The second, _Predicted probabilities_, reads a column of the dataset instead, and exists for models that cannot be exported at all.
+The **baseline prediction model** is where the audit begins. Two sources are offered, and this demo uses the first: the `.medmodel` imported in the previous stage. The second, _Predicted probabilities_, reads a column of the dataset instead, and exists for models that cannot be exported with a predict_proba() function.
 
 <figure><img src="../.gitbook/assets/demo/09-baseline-model.png" alt=""><figcaption><p>Figure 9: the imported <code>BaggingClassifier_model_sklearn.medmodel</code> selected as the base model</p></figcaption></figure>
 
@@ -35,40 +35,6 @@ The session name is how the run is found again: it labels the session in the Ana
 ## Configuring the confidence method
 
 The right column holds four collapsible sections. This run keeps every prefilled value, which makes it reproducible and gives a baseline to vary from later. Each field carries a ⓘ hover hint in the interface, and the [Configuration reference](../med3pa/analysis/configuration.md) documents them all.
-
-### IPC
-
-The IPC is the regressor that learns, from a patient's features alone, how much the base model can be trusted for that patient.
-
-| Field | Value | Why it matters here |
-| --- | --- | --- |
-| `ipc_type` | Random forest | The default, and the only family that can be grid searched usefully |
-| `n_estimators` | 100 | More trees smooth the confidence estimate; the cost is runtime |
-| `max_depth` | 5 | Shallow, against a cohort 244 features wide |
-| `min_samples_split` | 2 | Left at the default |
-| Confidence metric | Sigmoidal | What the IPC is trained to reproduce |
-
-<figure><img src="../.gitbook/assets/demo/11-ipc-settings.png" alt=""><figcaption><p>Figure 11: the IPC section expanded, with the grid-search fields left empty</p></figcaption></figure>
-
-The grid-search fields stay empty, so the IPC trains directly with the values above. Filling in any one of them turns a cross-validated search on and lengthens the run considerably.
-
-### APC
-
-The APC is the decision tree that splits the cohort into profiles. It is the part of the configuration that most changes what the results look like. This run keeps the defaults: a depth of 3, `min_samples_leaf` of 5, and `ccp_alpha` of 0.001.
-
-<figure><img src="../.gitbook/assets/demo/12-apc-settings.png" alt=""><figcaption><p>Figure 12: the APC section. Screenshot not captured yet; the section is collapsed in Figure 8.</p></figcaption></figure>
-
-{% hint style="info" %}
-Depth is the dial to reach for first. A depth of 3 yields profiles of at most three conditions, which is roughly the limit of what reads as a clinical description, and it is what produced the rules this run reports, such as `age_original <= 77.5 & adm_lung_cancer <= 0.5 & dx_metastatic_solid_cancer <= 0.5`. Raising it finds narrower groups at the cost of rules nobody can act on.
-{% endhint %}
-
-### MPC and experiment settings
-
-The MPC combines the per-patient IPC and the per-profile APC into the single value the declaration decision uses. This run keeps **minimum**, the conservative choice: a patient is trusted only when the individual estimate and the profile agree. It is the strategy every deployment in this walkthrough carries.
-
-The samples-ratio sweep stays at its default of 0 to 10 in steps of 5, so profile extraction is repeated at three population thresholds and the tree can be read at three levels of granularity. **Evaluate models** stays on, which scores the IPC and APC themselves and is worth the extra runtime on a first run.
-
-<figure><img src="../.gitbook/assets/demo/13-run-progress.png" alt=""><figcaption><p>Figure 13: the MPC and experiment settings, and the run in progress. Screenshot not captured yet.</p></figcaption></figure>
 
 ## Running
 
