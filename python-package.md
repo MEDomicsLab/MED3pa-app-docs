@@ -18,13 +18,19 @@ Everything the application computes is computed by the [MED3pa Python package](h
 
 ### Installation
 
+```bash
+pip install MED3pa
+```
+
 {% hint style="warning" %}
-The library is **not on PyPI**. The application pins it to a specific GitHub commit in `pythonEnv/requirements.txt`, and Python 3.12 is required; see [Quick start](quick-start.md#id-3.-python-environment).
-{% endhint %}
+That installs the current stable release. The application pins a **pre-release**, `MED3pa==1.1.0a3`, which pip will not resolve to unless you ask for it by version or pass `--pre`. To match what the app runs:
 
 ```bash
-pip install git+https://github.com/MEDomicsLab/MED3pa.git
+pip install MED3pa==1.1.0a3
 ```
+{% endhint %}
+
+The package declares `Requires-Python >=3.9`; the application bundles 3.12. Pinning the surrounding dependencies matters as much as the version itself, so see [Quick start](quick-start.md#id-3.-python-environment) for the combination that resolves.
 
 ### A simple example
 

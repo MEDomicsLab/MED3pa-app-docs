@@ -6,8 +6,44 @@ description: Installation of the app
 
 ## How to download and install the MED3pa application
 
+Packaged builds are published on the [releases page](https://github.com/MEDomicsLab/MED3pa-app/releases). The most recent is **v0.1.0-alpha.4**, published on 21 August 2026.
+
 {% hint style="warning" %}
-There is no packaged installer yet. Until the first release is published, the application is installed from source by following the steps below. The same steps are also the contribution guide.
+These are **pre-releases**. They are complete enough to run the whole pipeline, and are what this documentation is written against, but they carry an alpha version number for a reason: interfaces and file formats may still change between builds. Check the releases page for anything newer than the version named here.
+{% endhint %}
+
+{% tabs %}
+{% tab title="Windows" %}
+Download [**MED3pa-0.1.0-alpha.4-win.exe**](https://github.com/MEDomicsLab/MED3pa-app/releases/download/v0.1.0-alpha.4/MED3pa-0.1.0-alpha.4-win.exe) (93 MB) and run it.
+
+If SmartScreen warns about an unrecognised publisher, choose **More info**, then **Run anyway**.
+{% endtab %}
+
+{% tab title="MacOS" %}
+Download [**MED3pa-0.1.0-alpha.4-mac.dmg**](https://github.com/MEDomicsLab/MED3pa-app/releases/download/v0.1.0-alpha.4/MED3pa-0.1.0-alpha.4-mac.dmg) (123 MB), open it, and drag MED3pa into Applications.
+
+If macOS refuses to open it on the first double-click, open it once from the right-click menu with **Open**, and confirm.
+{% endtab %}
+
+{% tab title="Linux" %}
+Download [**MED3pa-0.1.0-alpha.4-linux.deb**](https://github.com/MEDomicsLab/MED3pa-app/releases/download/v0.1.0-alpha.4/MED3pa-0.1.0-alpha.4-linux.deb) (102 MB) and install it:
+
+```bash
+sudo apt install ./MED3pa-0.1.0-alpha.4-linux.deb
+```
+
+Using `apt` rather than `dpkg -i` lets it pull any missing dependencies in the same step.
+{% endtab %}
+{% endtabs %}
+
+{% hint style="danger" %}
+**MongoDB is still required.** The application starts and stops `mongod` itself, but it does not ship it: install MongoDB Community Edition first and make sure it is on your `PATH`. The instructions are in [section 1.1](#id-1.-prerequisites) below, and they are the only part of the contribution guide that also applies to a packaged install.
+{% endhint %}
+
+On first launch you are asked to pick a **workspace folder**. The application then sets up its own bundled Python, so there is nothing to install for it. After that, open **System** from the header and check that the Go server, MongoDB and the Python environment are all reported as running or set. If an analysis fails immediately, that page is where the reason will be. See [Interface overview](interface-overview.md#system-page).
+
+{% hint style="info" %}
+If the Python setup did not complete, each release also ships **MED3pa-PythonEnv.zip**, a repair kit holding the requirements file and a script that builds the environment. See [section 3](#id-3.-python-environment).
 {% endhint %}
 
 ### The MED3pa application architecture <a href="#the-med3pa-application-architecture" id="the-med3pa-application-architecture"></a>
@@ -31,6 +67,8 @@ Nothing calls the MED3pa library directly from the UI: the renderer posts a JSON
 ***
 
 ## Contribute to MED3pa-App 🌱 <a href="#contribute-to-med3pa" id="contribute-to-med3pa"></a>
+
+Everything from here on installs the application **from source**, which is what you want in order to modify MED3pa rather than only use it. If you installed a packaged build above, the one section that still concerns you is [1.1, MongoDB](#id-1.-prerequisites).
 
 ### 1. Prerequisites <a href="#id-1.-prerequisites" id="id-1.-prerequisites"></a>
 
@@ -93,29 +131,39 @@ Node.js 18 or later is required.
 
 ### 3. Python environment <a href="#id-3.-python-environment" id="id-3.-python-environment"></a>
 
-{% hint style="danger" %}
-**Python 3.12 is required, not merely recommended.** MED3pa pins `checkpointer==2.1.0`, and every `checkpointer` 2.x release declares `Requires-Python >=3.12`. On 3.11 the install fails outright with _No matching distribution found_.
-{% endhint %}
+A packaged install normally needs nothing here. The application ships its own Python and installs the requirements into it on first run, which is why the System page reports **Python bundled: Yes**. This section matters when you are building from source, or when that automatic setup did not complete.
 
-The MED3pa library is **not on PyPI**. `pythonEnv/requirements.txt` installs it from GitHub at a pinned commit:
+The bundled interpreter is **CPython 3.12 on every platform**, Windows, macOS and Linux alike, so an environment you build yourself matches what ships as long as you leave the version alone.
+
+Everything the Python layer needs is declared in one file, `pythonEnv/requirements.txt`, which is what both the packaged app and the developer script install from:
 
 ```bash
 pip install -r pythonEnv/requirements.txt
 ```
 
-A helper script builds the whole conda environment in the right order; `numpy` has to be pinned before MED3pa is installed, otherwise pip pulls `numpy` 2.x and a `scipy` that conflicts with MED3pa's own `numpy<2.1.0` requirement:
+{% hint style="info" %}
+MED3pa itself comes from PyPI, pinned to a pre-release: `MED3pa==1.1.0a3`. Because it is a pre-release, a plain `pip install MED3pa` resolves to the older stable 1.0.4 instead. Pin the version, or pass `--pre`.
+{% endhint %}
+
+The rest of the file exists to hold a working combination together. `numpy` is held at 1.26.4 because MED3pa requires `<2.1.0`, which in turn forces `scipy` back to 1.11.4, the newest release happy on that numpy. `onnxruntime` must stay at 1.18 or later, since earlier releases cap at ONNX IR version 9 and reject IR 10 models outright.
+
+### Building the environment yourself
+
+A helper script wraps the same requirements file in a conda environment:
 
 ```bash
-bash pythonEnv/create_conda_env.sh med3pa_app
+bash pythonEnv/create_conda_env.sh med3pa_app 3.12
 ```
 
-If you are developing against a local checkout of the MED3pa library, pass it as a second argument to get an editable install instead:
+The two arguments are the environment name and the Python version, both optional, defaulting to `med3pa_app` and 3.12. Leave the version at the default: it is what every platform bundles. The script also pins `openssl` to 3.0.20, because conda ships OpenSSL 3.5 by default and that combination breaks pip's certificate loading on some interpreters. When it finishes it prints the interpreter path.
 
-```bash
-bash pythonEnv/create_conda_env.sh med3pa_app ../packages/MED3pa
-```
+Once the environment exists, point the application at that interpreter from the [System page](interface-overview.md#system-page).
 
-Once the environment exists, point the application at its interpreter from the [Settings page](interface-overview.md#settings-page).
+### If the automatic setup failed
+
+Every release ships [**MED3pa-PythonEnv.zip**](https://github.com/MEDomicsLab/MED3pa-app/releases/download/v0.1.0-alpha.4/MED3pa-PythonEnv.zip) for exactly this case. It is small, because it does **not** contain an environment: it holds `requirements.txt` and `create_conda_env.sh`, the two files above, so a packaged install can be repaired without cloning the repository.
+
+Unzip it, run the script, and set the resulting interpreter on the System page.
 
 ***
 
@@ -200,11 +248,11 @@ Rebuild after any `.go` file modification. `npm run dev` runs `npm run build:go`
 
 #### 6. Create Your Own Branch <a href="#id-6.-create-your-own-branch" id="id-6.-create-your-own-branch"></a>
 
-Always branch from the development branch, and ensure you have the latest changes:
+Always branch from `master`, and ensure you have the latest changes:
 
 ```zsh
-git checkout develop
-git pull origin develop
+git checkout master
+git pull origin master
 git checkout -b your-branch-name
 git push --set-upstream origin your-branch-name
 ```
@@ -239,9 +287,9 @@ git push
 
 #### 9. Create a Pull Request <a href="#id-9.-create-a-pull-request" id="id-9.-create-a-pull-request"></a>
 
-1. Go to the MED3paApp GitHub [Pull Requests page](https://github.com/Thedetektive/MED3paApp/pulls)
+1. Go to the MED3pa-app GitHub [Pull Requests page](https://github.com/MEDomicsLab/MED3pa-app/pulls)
 2. Click **New Pull Request**
-3. Target branch: `develop`
+3. Target branch: `master`
 4. Compare branch: `your-branch-name`
 
 ***
@@ -270,7 +318,7 @@ Ensure:
 #### 12. After Merge <a href="#id-12.-after-merge" id="id-12.-after-merge"></a>
 
 ```zsh
-git checkout develop
+git checkout master
 git pull
 git branch -d feature/your-feature-name # Time for a new feature
 ```
@@ -289,13 +337,13 @@ This workflow is recommended for external contributors.
 
 #### 4. Fork the Repository <a href="#id-4.-fork-the-repository" id="id-4.-fork-the-repository"></a>
 
-1. Go to the [official repo](https://github.com/Thedetektive/MED3paApp)
+1. Go to the [official repo](https://github.com/MEDomicsLab/MED3pa-app)
 2. Click **Fork**
 3. Clone your fork:
 
 ```zsh
-git clone https://github.com/<your-username>/MED3paApp.git
-cd MED3paApp
+git clone https://github.com/<your-username>/MED3pa-app.git
+cd MED3pa-app
 ```
 
 ***
@@ -303,7 +351,7 @@ cd MED3paApp
 #### 5. Add Upstream Remote <a href="#id-5.-add-upstream-remote" id="id-5.-add-upstream-remote"></a>
 
 ```zsh
-git remote add upstream https://github.com/Thedetektive/MED3paApp.git
+git remote add upstream https://github.com/MEDomicsLab/MED3pa-app.git
 ```
 
 Verify:
@@ -316,12 +364,12 @@ git remote -v
 
 #### 6. Create a Feature Branch <a href="#id-6.-create-a-feature-branch" id="id-6.-create-a-feature-branch"></a>
 
-Always branch from `develop`:
+Always branch from `master`:
 
 ```zsh
 git fetch upstream
-git checkout develop
-git pull upstream develop
+git checkout master
+git pull upstream master
 
 git checkout -b feature/your-feature-name
 ```
@@ -392,7 +440,7 @@ Before pushing:
 
 ```zsh
 git fetch upstream
-git rebase upstream/develop
+git rebase upstream/master
 ```
 
 ***
@@ -409,15 +457,15 @@ git push origin feature/your-feature-name
 
 1. Go to your fork on GitHub
 2. Click **Compare & Pull Request**
-3. Target branch: `develop` (base repo)
+3. Target branch: `master` (base repo)
 
 ***
 
 #### 12. After Merge <a href="#id-12.-after-merge-1" id="id-12.-after-merge-1"></a>
 
 ```zsh
-git checkout develop
-git pull upstream develop
+git checkout master
+git pull upstream master
 git branch -d feature/your-feature-name
 ```
 
@@ -430,7 +478,7 @@ git branch -d feature/your-feature-name
 Launch the Electron application (desktop app window) and start the required development servers (frontend/backend):
 
 ```shellscript
-cd <repo_path/MED3paApp>
+cd <repo_path/MED3pa-app>
 npm install
 npm run dev
 ```

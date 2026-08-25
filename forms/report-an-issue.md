@@ -4,7 +4,7 @@
 Below is a brief guide on how to submit a new issue.
 {% endhint %}
 
-Use our [GitHub page](https://github.com/Thedetektive/MED3paApp/issues) to report any issue with the **application**. Issues with the method or the library itself belong to the [MED3pa package repository](https://github.com/MEDomicsLab/MED3pa/issues).
+Use our [GitHub page](https://github.com/MEDomicsLab/MED3pa-app/issues) to report any issue with the **application**. Issues with the method or the library itself belong to the [MED3pa package repository](https://github.com/MEDomicsLab/MED3pa/issues).
 
 First, hit new issue to create a new one
 

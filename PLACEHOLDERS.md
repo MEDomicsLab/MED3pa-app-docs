@@ -36,8 +36,8 @@ the page that wants it and what it should show. Drop a PNG at
 Every video embed from the source GitBook was removed rather than left pointing at
 radiomics content. Two places are written to accept one when it exists:
 
-- `quick-start.md`: install walkthroughs per OS. There is no packaged installer
-  yet, so there is nothing to film until the first release.
+- `quick-start.md`: install walkthroughs per OS. Now that pre-release installers
+  are published, one per OS could be filmed against v0.1.0-alpha.4.
 - `demonstration/`: the proof of concept is written out stage by stage. A video
   would sit naturally at the top of `demonstration/README.md`.
 
