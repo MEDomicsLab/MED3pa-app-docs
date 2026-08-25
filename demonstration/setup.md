@@ -52,8 +52,6 @@ Four fields carry the demo:
 | **Target column** | `oym` |
 | **Decision threshold** | `0.5`, the default |
 
-The **features** field is the one that repays care. This model expects its columns in a specific order, and rows are assembled in exactly the order given here.
-
 {% hint style="success" %}
 Download [`features.txt`](../.gitbook/assets/features.txt), open it, and **copy the whole file into the features box**. It is the complete list of 244 column names in model order, comma separated, which is exactly the format the field takes. Retyping them by hand is not worth attempting.
 {% endhint %}

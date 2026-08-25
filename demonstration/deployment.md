@@ -53,12 +53,6 @@ The third routing status, 🟡 **Caution / review**, does not appear in this bat
 
 **Export to CSV** writes the whole table out with the underlying numbers, one row per patient, which is what a downstream system or an audit would consume.
 
-## Applying it to one patient
-
-The **Single patient** tab builds one numeric field per feature the deployed model declares, in the order the model expects them, and all of them must be filled before the model can be applied. With a model 244 features wide that is a long form, and the batch route is usually the practical one.
-
-<figure><img src="../.gitbook/assets/demo/19-single-patient.png" alt=""><figcaption><p>Figure 19: single-patient entry. Screenshot not captured yet.</p></figcaption></figure>
-
 {% hint style="danger" %}
 These fields are numeric. A categorical feature such as `admission_group` or `service_group` has to be entered as the same numeric encoding used in the training data, and there is nothing in the form to catch a wrong code. Keep the encoding to hand.
 {% endhint %}

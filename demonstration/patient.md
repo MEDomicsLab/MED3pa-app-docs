@@ -24,8 +24,6 @@ Clicking a card opens the full dashboard.
 
 The banner states the routing in words: **Reject, low confidence.** Beneath it, three figures place the patient against the deployment: the deployed model and its rate, the MPC confidence against the threshold, and the APC profile the patient falls into.
 
-The profile card also reports the lowest declaration rate at which this patient would still have been declared. For `PT-0009` that is **DR ≈ 98%**, a stark number: this stay only survives at rates so permissive that the model is answering for essentially everyone, which makes it one of the least trusted patients in the batch rather than a borderline call.
-
 ## Why the model was not trusted
 
 <figure><img src="../.gitbook/assets/demo/22-confidence-decomposition.png" alt=""><figcaption><p>Figure 22: IPC, APC and MPC against the deployment threshold, beside the base model's own output</p></figcaption></figure>
@@ -38,9 +36,9 @@ The decomposition is the heart of the page, because the two estimates can disagr
 | APC | 0.66 | How the base model performs across this patient's profile |
 | MPC | 0.57 | The combination compared against the threshold |
 
-Both estimates are low, and both are far below the bar. Under the `minimum` strategy the MPC follows whichever is lower, so it takes the IPC's 0.57. Even the more forgiving APC would not have cleared the threshold, so this is not a case of a patient being penalised for the company they keep: the model is unsure about this stay on both readings.
+Both estimates are low, and both are far below the bar. Under the `minimum` strategy the MPC follows whichever is lower, so it takes the IPC's 0.57.
 
-Beside it, the base model's own output: **71%** for the positive class, well past its 50% decision threshold. That contrast is the point of the whole page. A confident prediction and an untrustworthy one are different things, and only the second column tells you which you are holding.
+Beside it, the base model's own output: **71%** for the positive class, well past its 50% decision threshold.
 
 ## Where they sit in the cohort
 
@@ -54,19 +52,8 @@ The same two charts from the Analysis Workspace are redrawn for this patient. Th
 
 The dashboard closes with the feature values themselves, every column the model was given for this stay. For `PT-0009` that starts `age_original 73`, `ed_visit_count 2`, `ho_ambulance_count 0`, `total_duration 1`, followed by the long tail of diagnostic flags.
 
-This is what makes the page auditable rather than merely informative. A reviewer handed a flagged prediction can see the inputs, the profile those inputs put the patient in, and the two confidence estimates that followed, without leaving the screen.
-
 ## The record of what was run
 
 <figure><img src="../.gitbook/assets/demo/25-session-history.png" alt=""><figcaption><p>Figure 25: Session History for this workspace</p></figcaption></figure>
 
 Session History lists every analysis saved in the workspace with its date, session name, base model, dataset, target column, cohort size and status. For this proof of concept that is a single completed row: `session1`, run against `homr_oym_rf.medmodel` and `Holdout_prepared.csv` on the `oym` target, over 2,473 patients. Clicking the row reopens it in the Analysis Workspace exactly as it was.
-
-That closes the loop. The same workspace now holds the cohort, the audited model, the session behind the audit, the deployment made from it, and every patient it has answered for, which is the provenance a clinical deployment has to be able to show.
-
-## Where to go next
-
-* Vary one thing and re-run. APC tree depth changes what the profiles look like; the MPC strategy changes who gets withheld. Two sessions read side by side are more informative than one.
-* Change the metric on the third headline card and watch the suggested rate move with it, then decide which metric the deployment should actually be tuned for.
-* Take the same experiment to code with the [MED3pa package](../python-package.md) when you need to batch many runs.
-* Read the method itself in the [JAMIA article](https://doi.org/10.1093/jamia/ocag034).

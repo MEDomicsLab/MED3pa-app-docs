@@ -6,8 +6,6 @@ description: >-
 
 # Reading the results
 
-Step 2. This is where the proof of concept earns its name: everything up to here was setup, and everything after depends on the rate chosen on this page.
-
 ## The session
 
 A run launched from the Configuration page opens here already loaded. Older ones are picked from the selector, or from Session History.
@@ -47,14 +45,13 @@ The improvement figure is worth reading carefully: it compares the metric at the
 
 ## The declaration-rate curve
 
-Lowering the rate withholds the least confident predictions first. Reading the curve from right to left answers the deployment question directly: what does accuracy become if the model is allowed to stay quiet about the hardest cases, and how many patients does that silence cost?
+Lowering the rate withholds the least confident predictions first. Reading the curve from right to left answers the deployment question directly: what does accuracy become if the model is allowed to stay quiet about the hardest cases?
 
 <figure><img src="../.gitbook/assets/demo/12-mdr-and-tree.png" alt=""><figcaption><p>Figure 12: metrics by declaration rate, beside the profile tree, both at the active rate of 60%</p></figcaption></figure>
 
-At 60% the slider reports a minimum confidence of **0.927** and **59.0%** of the cohort still answered for. Two readings matter more than the shape itself:
+At 60% the slider reports a minimum confidence of **0.927** and **59.0%** of the cohort still answered for.
 
-* **A curve that rises as the rate falls** is a model whose own uncertainty is informative. The predictions it is unsure about really are the ones it gets wrong, which is what makes abstention worth anything.
-* **A flat curve** says the confidence estimate carries little signal for that metric on that cohort, and that withholding predictions is buying nothing.
+**A curve that rises as the rate falls** is a model whose own uncertainty is informative. The predictions it is unsure about really are the ones it gets wrong, which is what makes abstention worth anything.
 
 The dots along the DR axis are the profiles dropping out of the tree, one dot per profile, at the exact rate where it goes. They are the same events as the greying nodes in the tree beside them.
 
@@ -102,15 +99,13 @@ For `age_original <= 78.5 → adm_lung_cancer <= 0.5`:
 | Specificity | 1.00 | MCC | 0.30 |
 | Recall | 0.09 | | |
 
-This is exactly why per-profile metrics are worth opening rather than trusting a headline. Accuracy of 0.99 and precision of 1.00 look immaculate, but the positive rate in this profile is 1.6%: the model reaches that accuracy largely by predicting the negative class, and sensitivity of 0.09 says it finds fewer than one in ten of the deaths that do occur here. A single aggregate number would have shown the 0.99 and hidden the 0.09.
-
 {% hint style="success" %}
 Per-profile performance is the deliverable a model owner can act on. A weak profile is a concrete instruction: gather more of these patients, or retrain with them weighted, or route them to a human by policy rather than by threshold.
 {% endhint %}
 
 ## Choosing the rate
 
-The suggested rate optimises one metric. The rate you deploy is a judgement that also weighs how many patients you are willing to leave unanswered, and who they turn out to be. A rate that looks excellent on the curve but silences an entire branch of the tree is a different proposition from one that thins every profile evenly, and the tree beside the curve is what makes the difference visible.
+The suggested rate optimises one metric. The rate you deploy is a judgement that also weighs how many patients you are willing to leave unanswered, and who they turn out to be.
 
 **▶ Create Model** freezes the decision. The dialog restates exactly what is being frozen, so it is recorded rather than implied.
 
