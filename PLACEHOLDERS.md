@@ -43,59 +43,29 @@ radiomics content. Two places are written to accept one when it exists:
 
 ## The proof of concept
 
-`demonstration/` is a five-stage walkthrough with 33 figures, all under
-`.gitbook/assets/demo/`. Seventeen are real, cropped from the captures in
-`proof of concept 3`. Sixteen are still generated placeholder cards; each of those
-figures has a caption ending "Screenshot not captured yet", and the surrounding
-prose is written so it never describes something the reader cannot see. Replace a
-file with the real screenshot, keeping the name, and the page picks it up with no
-edit; then drop that sentence from the caption.
+`demonstration/` is a five-stage walkthrough with 25 figures, all under
+`.gitbook/assets/demo/`, numbered in reading order. Twenty-four are real
+screenshots. Replace a placeholder card with the real screenshot, keeping the file
+name, and the page picks it up with no edit.
 
-Still to capture:
+One slot is still a placeholder:
 
 | File | Page | Should show |
 |---|---|---|
-| `01-workspace-gate.png` | setup | The workspace gate before a folder is chosen |
-| `02-header.png` | setup | The header bar once a workspace is open |
-| `04-datasets-list.png` | setup | The Datasets tab with the cohorts listed after import |
-| `07-model-imported.png` | setup | The base model under "Already imported" |
-| `12-apc-settings.png` | configuration | The APC section expanded |
-| `13-run-progress.png` | configuration | MPC and experiment settings, plus the progress bar mid-run |
-| `14-session-loaded.png` | analysis | The session selector with a session loaded |
-| `15-saved-config.png` | analysis | "Saved configuration" unfolded |
-| `17-dr-100.png` | analysis | The DR slider at 100% |
-| `18-mdr-curve.png` | analysis | The MDR curve, undimmed and with no dialog over it |
-| `19-mdr-at-dr.png` | analysis | The curve at the deployed rate, with lost-profile markers |
-| `20-tree-full.png` | analysis | The APC tree at DR 100% |
-| `21-tree-faded.png` | analysis | The same tree at the deployed rate, profiles faded |
-| `22-node-detail.png` | analysis | A node's detail dialog, showing per-profile metrics |
-| `27-single-patient.png` | deployment | The single-patient manual entry tab |
-| `32-session-history.png` | patient | The Session History table |
+| `19-single-patient.png` | deployment | The single-patient manual entry tab |
 
-The analysis page carries the two facts that depend on those captures: the
-per-profile performance figures (needs `22`) and the rate at which the first
-profile drops out (needs `19`).
+Its caption is the only one ending "Screenshot not captured yet". Because the model
+is 244 features wide, that form is long; a crop of the first row or two of fields
+plus the Apply button would do.
 
-## Links to confirm
+## Files shipped for the proof of concept
 
-- **Repository URL.** Every link points at `https://github.com/Thedetektive/MED3paApp`,
-  which is where the app currently lives. Update everywhere if it moves under the
-  MEDomicsLab organization.
-- **Contact form** in `forms/contact-us.md` is the Google Form carried over from the
-  source GitBook. Confirm it is the right one for MED3pa.
-- **Discord invite** in `SUMMARY.md` is the MEDomicsLab invite from the source GitBook.
-- **`README.md` cover image** is `cancer-ai.jpg`, inherited from the source GitBook.
-  It is generic AI-in-medicine art, not MED3pa-specific, so swap it if you have
-  something better.
+`.gitbook/assets/` also carries the four artefacts the walkthrough links for
+download: `homr_oym_rf.onnx` (18 MB), `Holdout_prepared.csv`, `Deploy3_newmodel.csv`
+and `features.txt`. The cohort is synthetic, published on Zenodo under CC BY 4.0
+(`10.5281/zenodo.12954673`), so it can be redistributed here.
 
-## Assets
-
-`.gitbook/assets/` was emptied of everything radiomics-specific. What is left is
-either MED3pa material copied from the website and the package, or generic
-material from the source GitBook that still applies (`cancer-ai.jpg`,
-`MEDomicsLab-Principles-1.png`, `NewIssue*.png`, `AffiliationsMartin.png`,
-`github-logo.png`, `linkedin-logo.png`; the last two are currently unused).
-
-`MED3paPackage.svg` and `MED3paSubpackage.svg` come from the package docs and have
-hard-coded white backgrounds, so they need a white container to look right in dark
-mode.
+Screenshot sources, for anyone re-cropping: `proof of concept 3/third_pics` holds
+the single-window captures behind figures 1, 2, 4, 5 and 9 to 14 and 25;
+`med32papocpics` and `second_pics` hold the earlier dual-monitor captures behind the
+rest, which is why a few of those show other session or deployment names.

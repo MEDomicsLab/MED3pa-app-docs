@@ -4,32 +4,32 @@ description: Declaring the inputs and choosing how confidence is estimated.
 
 # Configuring the run
 
-Step 1 of the workflow. The left column of the Configuration page says **what** is being analysed; the right column says **how** confidence is estimated. The figures come from `session1`.
+Step 1 of the workflow. The left column of the Configuration page says **what** is being analysed; the right column says **how** confidence is estimated.
 
-<figure><img src="../.gitbook/assets/demo/08-configuration-page.png" alt=""><figcaption><p>Figure 8: the Configuration page, filled in and ready to run</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/demo/06-configuration-page.png" alt=""><figcaption><p>Figure 6: the Configuration page, filled in and ready to run</p></figcaption></figure>
 
 ## Declaring the inputs
 
 The **baseline prediction model** is where the audit begins. Two sources are offered, and this demo uses the first: the `.medmodel` imported in the previous stage. The second, _Predicted probabilities_, reads a column of the dataset instead, and exists for models that cannot be exported with a predict_proba() function.
 
-<figure><img src="../.gitbook/assets/demo/09-baseline-model.png" alt=""><figcaption><p>Figure 9: the imported <code>BaggingClassifier_model_sklearn.medmodel</code> selected as the base model</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/demo/07-baseline-model.png" alt=""><figcaption><p>Figure 7: the base model picker. For this proof of concept the entry to choose is <code>homr_oym_rf.medmodel</code>.</p></figcaption></figure>
 
 The remaining three fields identify the cohort and the run:
 
 | Field | Value used here |
 | --- | --- |
-| **Training Data (.csv)** | `Holdout_homr_any_visit_10pct.csv` |
+| **Training Data (.csv)** | `Holdout_prepared.csv` |
 | **Target column** | `oym` |
 | **Session Name** | `session1` |
 
-<figure><img src="../.gitbook/assets/demo/10-dataset-target.png" alt=""><figcaption><p>Figure 10: cohort, target column and session name</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/demo/08-dataset-target.png" alt=""><figcaption><p>Figure 8: cohort, target column and session name</p></figcaption></figure>
 
 {% hint style="info" %}
 The cohort selected here is the **holdout** file rather than the larger learning split sitting beside it. That is the right way round: MED3pa should measure how the model behaves on stays it did not learn from, because running the analysis over training data flatters every confidence estimate.
 {% endhint %}
 
 {% hint style="info" %}
-The session name is how the run is found again: it labels the session in the Analysis Workspace selector and in Session History. Naming a run for what it varies, rather than for the date, pays off as soon as there are several of them, and this proof of concept ended up with three.
+The session name is how the run is found again: it labels the session in the Analysis Workspace selector and in Session History. Naming a run for what it varies, rather than for the date, pays off as soon as there are several of them.
 {% endhint %}
 
 ## Configuring the confidence method
