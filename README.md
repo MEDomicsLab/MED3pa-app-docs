@@ -28,7 +28,7 @@ layout:
 # 👋 Welcome!
 
 {% hint style="warning" %}
-MED3pa is published as **pre-releases**, the most recent being v0.1.0-alpha.4. They run the whole pipeline, but interfaces and file formats may still change between builds. Installers are on the [releases page](https://github.com/MEDomicsLab/MED3pa-app/releases).
+MED3pa is published as **pre-releases**, the most recent being v0.1.0-alpha.5. They run the whole pipeline, but interfaces and file formats may still change between builds. Installers are on the [releases page](https://github.com/MEDomicsLab/MED3pa-app/releases).
 {% endhint %}
 
 Welcome to the MED3pa-app documentation, where you will find all the resources you need to download, install and use the application.

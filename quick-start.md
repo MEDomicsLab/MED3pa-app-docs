@@ -6,7 +6,7 @@ description: Installation of the app
 
 ## How to download and install the MED3pa application
 
-Packaged builds are published on the [releases page](https://github.com/MEDomicsLab/MED3pa-app/releases). The most recent is **v0.1.0-alpha.4**, published on 21 August 2026.
+Packaged builds are published on the [releases page](https://github.com/MEDomicsLab/MED3pa-app/releases). The most recent is **v0.1.0-alpha.5**.
 
 {% hint style="warning" %}
 These are **pre-releases**. They are complete enough to run the whole pipeline, and are what this documentation is written against, but they carry an alpha version number for a reason: interfaces and file formats may still change between builds. Check the releases page for anything newer than the version named here.
@@ -14,22 +14,22 @@ These are **pre-releases**. They are complete enough to run the whole pipeline, 
 
 {% tabs %}
 {% tab title="Windows" %}
-Download [**MED3pa-0.1.0-alpha.4-win.exe**](https://github.com/MEDomicsLab/MED3pa-app/releases/download/v0.1.0-alpha.4/MED3pa-0.1.0-alpha.4-win.exe) (93 MB) and run it.
+Download [**MED3pa-0.1.0-alpha.5-win.exe**](https://github.com/MEDomicsLab/MED3pa-app/releases/download/v0.1.0-alpha.5/MED3pa-0.1.0-alpha.5-win.exe) (93 MB) and run it.
 
 If SmartScreen warns about an unrecognised publisher, choose **More info**, then **Run anyway**.
 {% endtab %}
 
 {% tab title="MacOS" %}
-Download [**MED3pa-0.1.0-alpha.4-mac.dmg**](https://github.com/MEDomicsLab/MED3pa-app/releases/download/v0.1.0-alpha.4/MED3pa-0.1.0-alpha.4-mac.dmg) (123 MB), open it, and drag MED3pa into Applications.
+Download [**MED3pa-0.1.0-alpha.5-mac.dmg**](https://github.com/MEDomicsLab/MED3pa-app/releases/download/v0.1.0-alpha.5/MED3pa-0.1.0-alpha.5-mac.dmg) (123 MB), open it, and drag MED3pa into Applications.
 
 If macOS refuses to open it on the first double-click, open it once from the right-click menu with **Open**, and confirm.
 {% endtab %}
 
 {% tab title="Linux" %}
-Download [**MED3pa-0.1.0-alpha.4-linux.deb**](https://github.com/MEDomicsLab/MED3pa-app/releases/download/v0.1.0-alpha.4/MED3pa-0.1.0-alpha.4-linux.deb) (102 MB) and install it:
+Download [**MED3pa-0.1.0-alpha.5-linux.deb**](https://github.com/MEDomicsLab/MED3pa-app/releases/download/v0.1.0-alpha.5/MED3pa-0.1.0-alpha.5-linux.deb) (102 MB) and install it:
 
 ```bash
-sudo apt install ./MED3pa-0.1.0-alpha.4-linux.deb
+sudo apt install ./MED3pa-0.1.0-alpha.5-linux.deb
 ```
 
 Using `apt` rather than `dpkg -i` lets it pull any missing dependencies in the same step.
@@ -161,7 +161,7 @@ Once the environment exists, point the application at that interpreter from the 
 
 ### If the automatic setup failed
 
-Every release ships [**MED3pa-PythonEnv.zip**](https://github.com/MEDomicsLab/MED3pa-app/releases/download/v0.1.0-alpha.4/MED3pa-PythonEnv.zip) for exactly this case. It is small, because it does **not** contain an environment: it holds `requirements.txt` and `create_conda_env.sh`, the two files above, so a packaged install can be repaired without cloning the repository.
+Every release ships [**MED3pa-PythonEnv.zip**](https://github.com/MEDomicsLab/MED3pa-app/releases/download/v0.1.0-alpha.5/MED3pa-PythonEnv.zip) for exactly this case. It is small, because it does **not** contain an environment: it holds `requirements.txt` and `create_conda_env.sh`, the two files above, so a packaged install can be repaired without cloning the repository.
 
 Unzip it, run the script, and set the resulting interpreter on the System page.
 
