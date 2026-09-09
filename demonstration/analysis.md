@@ -25,7 +25,7 @@ A run launched from the Configuration page opens here already loaded. Older ones
 | APC | tree depth 3, `min_samples_leaf` 5, `ccp_alpha` 0.001 |
 | MPC | `minimum` |
 
-## What the headline figures say
+## What The Headline Figures Say
 
 <figure><img src="../.gitbook/assets/demo/11-kpi-cards.png" alt=""><figcaption><p>Figure 11: patients analysed, suggested declaration rate, and improvement at that rate</p></figcaption></figure>
 
@@ -43,29 +43,29 @@ Optimal rates differ per metric, so this dropdown is the first thing to touch on
 
 The improvement figure is worth reading carefully: it compares the metric at the suggested rate against the same metric over the whole population, which is the number a conventional validation report would have quoted. The gap between them is the part of the model's performance that was being hidden by averaging.
 
-## The declaration-rate curve
+## The Metrics by Declaration-Rate Curve
 
-Lowering the rate withholds the least confident predictions first. Reading the curve from right to left answers the deployment question directly: what does accuracy become if the model is allowed to stay quiet about the hardest cases?
+Lowering the rate withholds the least confident predictions first. Reading the curve from right to left shows us different metrics (e.g. specificity, sensitivity, auc, etc.) of the base model on a smaller and smaller cohort for which it is most confident on.
 
 <figure><img src="../.gitbook/assets/demo/12-mdr-and-tree.png" alt=""><figcaption><p>Figure 12: metrics by declaration rate, beside the profile tree, both at the active rate of 60%</p></figcaption></figure>
 
-At 60% the slider reports a minimum confidence of **0.927** and **59.0%** of the cohort still answered for.
+At a declaration rate of 60% the slider reports a minimum confidence of **0.927** and **59.0%** of the cohort still answered for. Meaning of the 59% of the patients for which the model performs the best, the lowest confidence is 0.927.
 
 **A curve that rises as the rate falls** is a model whose own uncertainty is informative. The predictions it is unsure about really are the ones it gets wrong, which is what makes abstention worth anything.
 
 The dots along the DR axis are the profiles dropping out of the tree, one dot per profile, at the exact rate where it goes. They are the same events as the greying nodes in the tree beside them.
 
 {% hint style="info" %}
-Population kept is not the same number as the declaration rate, which is why 60% and 59.0% differ here. It is measured at the operating point immediately below the current threshold, so it describes what is really retained rather than the nominal rate.
+Population kept is not the same number as the declaration rate, which is why 60% and 59.0% differ here. The reason only 59% is kept despite putting the slider at 60% is that patients with equal confidence will both be removed, thus potentially skipping some percentages.
 {% endhint %}
 
-## The profiles
+## The Profiles
 
 The tree partitions the same cohort into readable rules. Colouring by mean confidence level gives the fastest read of where the model is comfortable, and the ⤢ button expands it to full screen with the same controls.
 
 <figure><img src="../.gitbook/assets/demo/13-tree-expanded.png" alt=""><figcaption><p>Figure 13: the expanded profile tree at 60%. The greyed nodes are the profiles lost at this rate.</p></figcaption></figure>
 
-At depth 3 over 244 features, the tree split on age and on two cancer flags:
+At depth 3, the tree split on age and on two cancer flags:
 
 ```
 age_original <= 78.5 & adm_lung_cancer <= 0.5 & adm_metastasis <= 0.5
@@ -78,6 +78,7 @@ That is the payoff of keeping the tree shallow. Out of 244 columns, the profile 
 The greying is the part to read alongside the curve. At 60% the entire `age_original > 78.5` branch has gone, along with both cancer-positive leaves. Everything MED3pa is still willing to answer for sits in one corner of the tree: younger stays without a lung-cancer or metastasis flag. A rate that looks like a modest trade on the curve turns out, in the tree, to be a decision about **which kinds of patient the model still speaks for**.
 
 Clicking a node opens its detail: the profile path, its share of the population, its mean confidence, and a bar per metric for the base model's performance **inside that profile**.
+By analyzing profile performances individually we can understand how the base model interacts with patients of certain profiles. For example, in this proof of concept we can observe that the model has a very high specificity (1.00) but very low sensitivity (0.09) when predicting on the  `age_original <= 78.5 → adm_lung_cancer <= 0.5` group. This means that this specific base model is a lot more likely to predict a negative outcome for people with both these traits.
 
 <figure><img src="../.gitbook/assets/demo/14-node-detail.png" alt=""><figcaption><p>Figure 14: base-model performance within the largest surviving profile</p></figcaption></figure>
 
@@ -103,7 +104,7 @@ For `age_original <= 78.5 → adm_lung_cancer <= 0.5`:
 Per-profile performance is the deliverable a model owner can act on. A weak profile is a concrete instruction: gather more of these patients, or retrain with them weighted, or route them to a human by policy rather than by threshold.
 {% endhint %}
 
-## Choosing the rate
+## Choosing The Rate
 
 The suggested rate optimises one metric. The rate you deploy is a judgement that also weighs how many patients you are willing to leave unanswered, and who they turn out to be.
 

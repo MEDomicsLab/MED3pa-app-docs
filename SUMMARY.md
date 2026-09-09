@@ -35,4 +35,4 @@
 * [📦 Package on GitHub](https://github.com/MEDomicsLab/MED3pa)
 * [📚 Package documentation](https://med3pa.readthedocs.io/en/latest/)
 * [📺 YouTube](https://www.youtube.com/@MEDomicsLab)
-* [👾 Discord](https://discord.gg/kzNVmDsXWp)
+* [👾 Discord](https://discord.gg/ZbaGj8E6mP)

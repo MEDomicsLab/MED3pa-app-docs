@@ -9,8 +9,6 @@ description: >-
 
 This is **proof of concept 1** for the MED3pa application: a complete run over a hospital cohort of 2,473 stays, one stage per page, with the real screens shown throughout.
 
-Unlike the other MEDomics proofs of concept, nothing here trains a predictive model. The model already exists. What this walkthrough produces is an answer to a different question: **for which patients can that model be believed, and what does it cost to make it stay quiet about the rest?**
-
 ## Files used
 
 Everything this walkthrough needs is downloadable, so the whole run can be reproduced click for click.
@@ -30,7 +28,7 @@ A few screenshots were taken during earlier runs and show other session, deploym
 
 The cohort is drawn from **Leveraging patients' longitudinal data to improve the Hospital One-year Mortality Risk**, published on Zenodo by Laribi, Raymond, Taseen, Poenaru and Vallières (2024) under CC BY 4.0: [https://doi.org/10.5281/zenodo.12954673](https://doi.org/10.5281/zenodo.12954673).
 
-The published dataset is **synthetic**, generated with the AVATAR method in partnership with Octopize: 248,485 synthetic visits from 123,646 synthetic patients across 248 columns. That matters for a public demonstration, because it means the files above can be shipped and re-run by anyone without a data use agreement.
+The published dataset is **synthetic**, generated with the [AVATAR method](https://doi.org/10.1038/s41746-023-00771-5) in partnership with Octopize: 248,485 synthetic visits from 123,646 synthetic patients across 248 columns. That matters for a public demonstration, because it means the files above can be shipped and re-run by anyone without a data use agreement.
 
 `Holdout_prepared.csv` is a prepared slice of it: one row per hospital stay, **2,473 stays** across **245 columns**, being 244 features and the outcome.
 
@@ -58,8 +56,6 @@ This proof of concept shows how an existing mortality model can be audited and d
 * found the profiles where the model consistently underperforms;
 * frozen a declaration rate into a deployed model, and applied it to patients it has never seen;
 * opened one patient and read the whole chain of reasoning behind their routing.
-
-The confidence settings are the ones the application prefills. They are a deliberate starting point rather than a tuned configuration, so the walkthrough is reproducible: follow it with your own cohort and model, and only the numbers change.
 
 ## Steps
 

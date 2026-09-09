@@ -8,7 +8,7 @@ description: >-
 
 The batch table gives a verdict per patient. This stage answers the question that follows it: **why that verdict, for this patient?** The figures follow `PT-0009`, the stay the deployed model refused to answer for.
 
-## Finding them
+## Finding Them
 
 Patient Lookup searches every patient any deployed model in the workspace has scanned. Entering an identifier narrows the list; leaving the box empty lists everything.
 
@@ -18,13 +18,13 @@ Each card summarises one scan: the base model's prediction, the MPC confidence, 
 
 Clicking a card opens the full dashboard.
 
-## Reading the dashboard
+## Reading The Dashboard
 
 <figure><img src="../.gitbook/assets/demo/21-patient-banner.png" alt=""><figcaption><p>Figure 21: the recommendation banner and headline figures for <code>PT-0009</code></p></figcaption></figure>
 
 The banner states the routing in words: **Reject, low confidence.** Beneath it, three figures place the patient against the deployment: the deployed model and its rate, the MPC confidence against the threshold, and the APC profile the patient falls into.
 
-## Why the model was not trusted
+## Why The Model Was Not Trusted
 
 <figure><img src="../.gitbook/assets/demo/22-confidence-decomposition.png" alt=""><figcaption><p>Figure 22: IPC, APC and MPC against the deployment threshold, beside the base model's own output</p></figcaption></figure>
 
@@ -40,19 +40,19 @@ Both estimates are low, and both are far below the bar. Under the `minimum` stra
 
 Beside it, the base model's own output: **71%** for the positive class, well past its 50% decision threshold.
 
-## Where they sit in the cohort
+## Patient Analysis
 
 <figure><img src="../.gitbook/assets/demo/23-patient-tree.png" alt=""><figcaption><p>Figure 23: the deployed rate and the patient's own position marked on the curve, with their profile chain highlighted in the tree</p></figcaption></figure>
 
 The same two charts from the Analysis Workspace are redrawn for this patient. The curve marks the deployed rate and the highest rate at which this patient would still be declared; the tree highlights the path from the root down to their leaf. Together they place one individual inside the population-level result the analysis produced, which is the round trip the whole method exists to make.
 
-## The record behind the number
+## Features List
 
 <figure><img src="../.gitbook/assets/demo/24-clinical-data.png" alt=""><figcaption><p>Figure 24: the clinical data this prediction was made from</p></figcaption></figure>
 
 The dashboard closes with the feature values themselves, every column the model was given for this stay. For `PT-0009` that starts `age_original 73`, `ed_visit_count 2`, `ho_ambulance_count 0`, `total_duration 1`, followed by the long tail of diagnostic flags.
 
-## The record of what was run
+## Session History
 
 <figure><img src="../.gitbook/assets/demo/25-session-history.png" alt=""><figcaption><p>Figure 25: Session History for this workspace</p></figcaption></figure>
 

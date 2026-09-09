@@ -28,7 +28,7 @@ layout:
 # 👋 Welcome!
 
 {% hint style="warning" %}
-MED3pa is published as **pre-releases**, the most recent being v0.1.0-alpha.5. They run the whole pipeline, but interfaces and file formats may still change between builds. Installers are on the [releases page](https://github.com/MEDomicsLab/MED3pa-app/releases).
+MED3pa-app is published as **pre-releases**, the most recent being v0.1.0-alpha.5. They run the whole pipeline, but interfaces and file formats may still change between builds. Installers are on the [releases page](https://github.com/MEDomicsLab/MED3pa-app/releases).
 {% endhint %}
 
 Welcome to the MED3pa-app documentation, where you will find all the resources you need to download, install and use the application.
@@ -41,9 +41,9 @@ This application is part of the [MEDomics](https://medomics-udes.gitbook.io/medo
 
 ### The MED3pa application
 
-The MED3pa-app is a graphical implementation of the MED3pa Python package. It enables the use of MED3pa's functionalities through an interactive interface: uncertainty estimation, discovery of the data profiles where a model underperforms, and declaration-rate driven deployment.
+The [MED3pa-app](https://www.med3pa.app/) is a graphical implementation of the MED3pa Python package. It enables the use of [MED3pa](https://doi.org/10.1093/jamia/ocag034)'s functionalities through an interactive interface: uncertainty estimation, discovery of the data profiles where a model underperforms, and declaration-rate driven deployment.
 
-Unlike the other MEDomics modules, MED3pa does **not** train a predictive model for you. It takes a model you already have, trained anywhere and exported as ONNX, pickle or joblib, and studies its behaviour on a cohort you provide.
+MED3pa allows you to import your own predictive model, trained anywhere and exported as [ONNX](https://github.com/onnx/onnx), [pickle](https://docs.python.org/3/library/pickle.html) or [joblib](https://joblib.readthedocs.io/en/stable/), and studies its behaviour on a cohort you provide.
 
 <figure><img src=".gitbook/assets/MED3paPackage.svg" alt=""><figcaption><p>MED3pa package overview</p></figcaption></figure>
 
@@ -51,10 +51,10 @@ Unlike the other MEDomics modules, MED3pa does **not** train a predictive model 
 
 A model that reports 0.87 AUC on a test set reports one number for a whole population. In practice it is excellent for some patients and unreliable for others, and nothing in the usual evaluation tells you which is which. MED3pa's goal is to make that distinction visible and actionable:
 
-* estimate, per patient, how much the base model's prediction can be trusted;
-* group patients into readable profiles and show where the model consistently underperforms;
-* let you choose a **declaration rate**, the share of predictions the model is allowed to make, and see exactly what performance that buys;
-* deploy the model at that rate, so low-confidence cases are routed to a human instead of being answered.
+* Estimate, per patient, how much the base model's prediction can be trusted;
+* Group patients into readable profiles and show where the model consistently underperforms;
+* Let you choose a [**declaration rate**](med3pa/analysis/analysis-workspace.md), defining a confidence threshold.
+* Deploy the model at that rate, so low-confidence cases are routed to a human instead of being answered.
 
 The application wraps this in a three-step workflow, **Configure → Analyse → Deploy**, and stores every run in a local database so results can be revisited, compared and applied to new patients.
 
