@@ -1,6 +1,6 @@
 ---
 description: MED3pa, the application
-cover: .gitbook/assets/cancer-ai.jpg
+cover: .gitbook/assets/med3pa-cover.png
 coverY: -9.703648548026806
 layout:
   width: default

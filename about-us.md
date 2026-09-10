@@ -25,6 +25,15 @@
         <td></td>
         <!-- <td><a href="https://www.medomicslab.com/">https://www.medomicslab.com/</a><img src=".gitbook/assets/AffiliationsMartin.png" alt=""></td> -->
     </tr>
+    <tr>
+        <td><img src=".gitbook/assets/olivier_pic.jpeg" alt="" data-size="original"></td>
+        <td><h2><strong>Olivier Lefebvre</strong></h2></td>
+        <td>Student (Ph. D. Computer Science)</td>
+        <td>Université de Sherbrooke</td>
+        <!-- <td>Researcher – Medical Physics Unit - RIMUHC</td> -->
+        <td></td>
+        <!-- <td><a href="https://www.medomicslab.com/">https://www.medomicslab.com/</a><img src=".gitbook/assets/AffiliationsMartin.png" alt=""></td> -->
+    </tr>
 </tbody>
 
 </table>

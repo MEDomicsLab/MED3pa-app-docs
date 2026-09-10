@@ -1,6 +1,6 @@
 ---
 description: Brief introduction to Predictive Performance Precision Analysis in Medicine
-cover: ../.gitbook/assets/cancer-ai.jpg
+cover: ../.gitbook/assets/med3pa-cover.png
 coverY: 0
 ---
 
