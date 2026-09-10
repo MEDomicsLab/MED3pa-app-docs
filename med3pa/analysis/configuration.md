@@ -45,8 +45,8 @@ Hyperparameters of the regressor that learns to predict, from a patient's featur
 
 | Option | Formula |
 | --- | --- |
-| **Sigmoidal** _(default)_ | `1 / (1 + e^(10·ln3·(|yᵢ − ŷᵢ| − |t − yᵢ|)))` |
-| **Absolute** | `1 − |ŷᵢ − yᵢ|` is near 1 when the model was right about a patient, near 0 when it was confidently wrong |
+| **Sigmoidal** _(default)_ | `1 / (1 + e^(10·ln3·(\|yᵢ − ŷᵢ\| − \|t − yᵢ\|)))` |
+| **Absolute** | `1 − \|ŷᵢ − yᵢ\|` is near 1 when the model was right about a patient, near 0 when it was confidently wrong |
 | **Custom function** | Any expression `f(p, y)` you write |
 
 {% hint style="info" %}
