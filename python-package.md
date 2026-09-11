@@ -75,7 +75,7 @@ Passing a built-in confidence metric **by name** is known to raise a `TypeError`
 ### Going further
 
 * [Package documentation](https://med3pa.readthedocs.io/en/latest/): tutorials for the `datasets`, `models` and `med3pa` subpackages.
-* [Examples](https://github.com/MEDomicsLab/MED3pa/tree/main/examples): runnable notebooks, including a full one-year-mortality study.
+* [Example](https://github.com/MEDomicsLab/MED3pa/tree/main/examples): runnable notebooks, including a full one-year-mortality study.
 * [study\_3pa](https://github.com/MEDomicsLab/study_3pa): the complete code behind the results reported in the JAMIA article.
 
 Please feel free to [contact us](forms/contact-us.md) if you need any further assistance :innocent:.

@@ -37,9 +37,9 @@ Hyperparameters of the regressor that learns to predict, from a patient's featur
 
 | Field | Prefilled | Description |
 | --- | --- | --- |
-| `n_estimators` | 100 | Number of trees. More trees give a smoother, more stable confidence estimate but take longer to train. Ignored when a grid-search range is set. Only shown for forest-based regressors |
-| `max_depth` | 5 | Maximum depth of each tree. Deeper trees capture finer patterns in confidence but overfit more easily. Blank means unlimited |
-| `min_samples_split` | 2 | Minimum number of samples a node must hold before it may split. Higher values give a coarser, more conservative confidence surface |
+| `n_estimators` | 100 | **Number of trees.** More trees give a smoother, more stable confidence estimate but take longer to train. Ignored when a grid-search range is set. Only shown for forest-based regressors |
+| `max_depth` | 5 | **Maximum depth of each tree.** Deeper trees capture finer patterns in confidence but overfit more easily. Blank means unlimited |
+| `min_samples_split` | 2 | **Minimum number of samples a node must hold before it may split.** Higher values give a coarser, more conservative confidence surface |
 
 **Confidence metric formulation (cᵢ)** defines what the IPC is trained to predict. It is computed per patient from the base model's probability `p` and the true label `y`, and the IPC then learns to reproduce that value from features alone:
 
@@ -103,5 +103,5 @@ Custom expressions accept the variables `IPC` and `APC` and the same function se
 Click **⚡ Run Analysis**. A progress bar reports each stage as the Go server streams it back from the Python process. When the run finishes, the application saves the session and switches straight to the [Analysis Workspace](analysis-workspace.md) with it loaded.
 
 {% hint style="warning" %}
-A run that fails immediately is almost always an environment problem rather than a configuration one. Check the Python interpreter on the System page; it must have MED3pa installed. See [Quick start](../../quick-start.md#id-3.-python-environment).
+A run that fails immediately is almost always an environment problem rather than a configuration one. Check the Python interpreter on the System page; it must have MED3pa installed, or ensure that the go server is properly up and running. See [Quick start](../../quick-start.md#id-3.-python-environment).
 {% endhint %}

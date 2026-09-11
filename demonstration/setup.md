@@ -43,7 +43,7 @@ Switch to the **Base models** tab. The model audited here is [`homr_oym_rf.onnx`
 
 <figure><img src="../.gitbook/assets/demo/04-import-model-form.png" alt=""><figcaption><p>Figure 4: the Import External Model form, with the ONNX graph chosen and the target column set</p></figcaption></figure>
 
-Four fields carry the demo:
+This demonstration uses these four fields:
 
 | Field | Value used here |
 | --- | --- |
@@ -62,7 +62,7 @@ Download [`features.txt`](../.gitbook/assets/features.txt), open it, and **copy 
 
 Import writes the model into `MODELS/` as a `.medmodel`. Before saving anything, the application calls the model on a sample row, so a model that cannot be called is rejected here rather than halfway through an analysis.
 
-## ONNX inputs
+### ONNX inputs
 
 An ONNX graph carries no metadata about what its outputs mean, so the form grows two extra fields when the chosen file ends in `.onnx`. Both sit at the bottom of the panel, above **Import model**.
 

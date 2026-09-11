@@ -37,13 +37,18 @@ Open **Data & Models → Base models** and fill in:
 
 Two extra fields appear for `.onnx` files:
 
-* **Outputs are raw logits**: tick this only if the graph was exported without its final sigmoid/softmax.
+* **Outputs are raw logits**: 
+  A classifier normally ends with a sigmoid or a softmax, the step that squashes its internal score into a probability between 0 and 1. Some export pipelines strip that final layer off, so the graph returns the **raw logit** instead: an unbounded score where 0 means an even chance, large positive numbers mean likely, and large negative numbers mean unlikely.
 
+  MED3pa needs a probability, because every confidence estimate is computed from one. Ticking this box tells the application to apply the missing sigmoid itself.
+  Tick this only if the graph was exported without its final sigmoid/softmax.
   {% hint style="danger" %}
-  This cannot be detected automatically, and getting it wrong produces confidence scores that look plausible but are wrong.
+  Nothing can detect this automatically. A logit of 2.5 and a probability of 2.5 are indistinguishable to the importer, so getting the box wrong produces confidence scores that look entirely plausible and are wrong throughout. Tick it only when you know the graph was exported without its final activation.
   {% endhint %}
-
-* **Probability output name**: only needed when the graph has several outputs and none of them is named for probabilities.
+  
+* **Probability output name**: 
+  Some graphs expose several outputs, typically a hard label alongside the probabilities. When none of them is named in a way the importer recognises, this field names the one to read.
+  only needed when the graph has several outputs and none of them is named for probabilities.
 
 ### After importing
 
