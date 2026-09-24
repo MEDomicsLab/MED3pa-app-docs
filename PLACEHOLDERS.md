@@ -12,10 +12,6 @@ the page that wants it and what it should show. Drop a PNG at
 
 | Suggested file | Page | Should show |
 |---|---|---|
-| `OpeningPage.png` | `interface-overview.md` → Opening page | The workspace gate: "Choose a workspace folder to begin", with the Recent list |
-| `AppHeader.png` | `interface-overview.md` → Header | The header bar: workspace path, server status light, Data & Models, System, Change workspace |
-| `OverviewPage.png` | `interface-overview.md` → The MED3pa module | The Overview dashboard: the three KPI cards and the recent-activity feed |
-| `DatasetImport.png` | `med3pa/data-and-models/datasets.md` | The Datasets tab of the Data & Models panel with a few imported CSVs listed |
 | `SessionHistory.png` | `patient-lookup.md` → Session History | The session log table |
 | `DeploymentBatch.png` | `deployment.md` | The Batch processing tab with a dataset selected (the current figure shows manual entry) |
 
@@ -30,6 +26,9 @@ the page that wants it and what it should show. Drop a PNG at
 | `DeploymentPage.png` | website `tutos/deployment.png` | `deployment.md` |
 | `PatientLookup.png` | website `tutos/patient-lookup.png` | `patient-lookup.md`; it is the patient **detail** dashboard, not the search list |
 | `SettingsPage.png` | cropped from `proof of concept 3` | `interface-overview.md` → System page |
+| `OpeningPage.png` | app capture | `interface-overview.md` → Opening page |
+| `OverviewPage.png` | app capture | `interface-overview.md` → The MED3pa module; it also shows the header, which is why no separate header shot is listed |
+| `DatasetImport.png` | app capture | `med3pa/data-and-models/datasets.md` |
 
 ## Videos
 

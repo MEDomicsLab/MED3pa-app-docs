@@ -13,6 +13,8 @@ Upon starting the application, a landing screen asks you to select a **workspace
 
 Nothing in MED3pa can run before a workspace is selected. Folders you have opened before are listed under _Recent_, one click away.
 
+<figure><img src=".gitbook/assets/OpeningPage.png" alt=""><figcaption><p>The workspace gate, with previously opened folders listed under <em>Recent</em></p></figcaption></figure>
+
 ### Header
 
 Once a workspace is set, a thin header sits above the module. From left to right it holds:
@@ -31,7 +33,7 @@ The MED3pa page and the System page both stay mounted. Switching to System to fi
 
 ### The MED3pa module
 
-The module has its own sidebar with six entries, which follow the order of a typical study:
+The module opens on **Overview**, which reports what the workspace holds and what has happened in it most recently. It has its own sidebar with six entries, which follow the order of a typical study:
 
 | Page | Purpose |
 | --- | --- |
@@ -41,6 +43,8 @@ The module has its own sidebar with six entries, which follow the order of a typ
 | **Deployment** | Apply a deployed model to new patients, in batch or one at a time. See [Deployment](deployment.md) |
 | **Patient Lookup** | Search every patient a deployed model has scanned and open a full per-patient dashboard. See [Patient lookup](patient-lookup.md) |
 | **Session History** | Log of previous analysis runs; click a row to reopen it in the Analysis Workspace |
+
+<figure><img src=".gitbook/assets/OverviewPage.png" alt=""><figcaption><p>The Overview page: the header above, the module's sidebar on the left, and the counters and recent-activity feed</p></figcaption></figure>
 
 A three-step progress bar, **Configure model → Analysis → Deploy**, is repeated at the top of the pages that belong to the main workflow, so it is always clear where in the study you are.
 

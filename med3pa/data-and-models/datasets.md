@@ -14,6 +14,8 @@ MED3pa reads tabular cohorts. A dataset is a **CSV file** in which one row is on
 
 Once that is done, the file appears in the list and becomes selectable in the dataset pickers on the Configuration and Deployment pages.
 
+<figure><img src="../../.gitbook/assets/DatasetImport.png" alt=""><figcaption><p>The Datasets tab, with four cohorts imported into the workspace</p></figcaption></figure>
+
 {% hint style="warning" %}
 Importing copies the file. Editing the original afterwards has no effect on the imported copy; re-import it instead.
 {% endhint %}
