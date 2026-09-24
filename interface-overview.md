@@ -42,7 +42,7 @@ The module opens on **Overview**, which reports what the workspace holds and wha
 | **Analysis Workspace** | Explore a saved session: MDR curves, the APC profile tree, per-profile metrics; pick a declaration rate and create a deployed model. See [Analysis Workspace](med3pa/analysis/analysis-workspace.md) |
 | **Deployment** | Apply a deployed model to new patients, in batch or one at a time. See [Deployment](deployment.md) |
 | **Patient Lookup** | Search every patient a deployed model has scanned and open a full per-patient dashboard. See [Patient lookup](patient-lookup.md) |
-| **Session History** | Log of previous analysis runs; click a row to reopen it in the Analysis Workspace |
+| **Session History** | One row per saved run, recording its date, session name, base model, dataset, target column, cohort size and status; click a row to reopen it in the Analysis Workspace |
 
 <figure><img src=".gitbook/assets/OverviewPage.png" alt=""><figcaption><p>The Overview page: the header above, the module's sidebar on the left, and the counters and recent-activity feed</p></figcaption></figure>
 

@@ -42,6 +42,10 @@ The APC is a decision tree that partitions the cohort on the same features. Each
 
 This is what surfaces **disadvantaged profiles**, the groups where the base model consistently underperforms, which is exactly the information you need in order to refine a training set or retrain a model.
 
+Because a profile is expressed in the feature names themselves, the rules are the one place in the method where the meaning of a column matters. MED3pa otherwise treats every feature as an opaque number: a rule such as `age_original <= 78.5 & adm_lung_cancer > 0.5` is only actionable to a reader who knows what those columns record.
+
+Per-profile performance is also the form in which the analysis becomes actionable. A profile in which the base model underperforms is a concrete instruction: collect more patients of that kind, retrain with them weighted, or route them to human review by policy rather than by threshold.
+
 <figure><img src="../.gitbook/assets/ApcTree.png" alt=""><figcaption><p>The APC profile tree; clicking a node shows the base model's performance inside that profile</p></figcaption></figure>
 
 #### MPC: Mixed Predictive Confidence

@@ -24,7 +24,9 @@ Once loaded, **⚙ Saved configuration** unfolds the exact settings the session 
 | **Suggested declaration rate** | The declaration rate at which the selected metric is best |
 | **Improvement at optimal DR** | How much that metric gains against the full-population baseline, e.g. `Auc: 0.812 → 0.904` |
 
-The metric behind the last two cards is chosen from the dropdown inside the card; changing it moves the active declaration rate to that metric's optimum.
+The metric behind the last two cards is selected from the dropdown inside the third card. Changing it recomputes the optimal declaration rate for that metric and moves both the suggestion and the active rate to it. Optimal rates differ per metric: a model judged on F1 may warrant considerably more abstention than the same model judged on AUC, so the metric selected here should be the one the deployment is actually held to.
+
+The improvement figure compares the metric at the suggested rate against the same metric over the whole population, which is the value a conventional validation report would quote. The difference between the two is the part of the model's performance that population-level averaging conceals.
 
 ### The declaration-rate slider
 
@@ -34,7 +36,9 @@ The slider sets the **active DR threshold**, and everything below it reacts. Alo
 * **population kept**: the share of the cohort that actually clears that threshold.
 
 {% hint style="info" %}
-Population kept is the size of the population at the operating point immediately below the current threshold, so it reflects what is really retained rather than the nominal rate. The metrics displayed beside it are computed on the at-or-above population, so the two describe slightly different sets of patients.
+Population kept is not the same quantity as the declaration rate. It is the size of the population at the operating point immediately below the current threshold, so it reports what is actually retained rather than the nominal rate.
+
+Two consequences follow. Patients holding an identical confidence value are declared or withheld together, so the retained share can skip past a percentage point or two; this is a side effect of how ties are resolved rather than a deliberate design, but it explains a discrepancy that would otherwise look like an error. And the metrics displayed beside the figure are computed on the at-or-above population, so the two numbers describe slightly different sets of patients.
 {% endhint %}
 
 ### 📈 Metrics by declaration rate

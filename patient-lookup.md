@@ -28,7 +28,7 @@ The dashboard answers, for one patient, why the model was or was not trusted.
 
 **Headline figures.** The deployed model and its declaration rate; the MPC confidence against the threshold; and the APC profile membership, together with the lowest declaration rate at which this patient would still have been declared, a direct measure of how marginal the case is.
 
-**Confidence decomposition.** IPC, APC and MPC drawn as bars against the deployment threshold, so it is immediately visible whether an individual estimate or a weak profile is what pushed the patient below the line.
+**Confidence decomposition.** IPC, APC and MPC drawn as bars against the deployment threshold, so it is immediately visible whether an individual estimate or a weak profile is what pushed the patient below the line. The two estimates can disagree, and the reason for a routing decision lies in which of them fell short. Under the `minimum` strategy the MPC follows whichever is lower, so a prediction can be withheld on account of the profile a patient belongs to rather than anything in their own record.
 
 **Base model output.** The predicted probability for the positive class, positioned against the model's decision threshold.
 

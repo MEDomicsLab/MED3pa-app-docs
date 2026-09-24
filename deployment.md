@@ -14,6 +14,10 @@ Deployment is step 3. A **deployed model** is a session frozen at one declaratio
 
 Pick a deployed model from the selector; the panel underneath restates what it carries; the session it came from, the base model, the declaration rate and its minimum confidence, and the MPC strategy. If the list is empty, there is nothing to deploy yet: go back to the Analysis Workspace and create one.
 
+{% hint style="info" %}
+Several deployments can be created from a single session at different declaration rates, and they coexist; each appears in the selector with its rate in the label. Applying a conservative deployment and a permissive one to the same batch is the most direct way to measure what a given rate costs in coverage and returns in reliability.
+{% endhint %}
+
 ### Patient data input
 
 Two ways to feed it:
