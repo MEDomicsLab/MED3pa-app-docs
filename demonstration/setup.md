@@ -1,87 +1,77 @@
 ---
-description: Opening a workspace and bringing the cohort and the model into it.
+description: Opening a workspace and importing the cohort and the base model.
 ---
 
 # Workspace and inputs
 
-Nothing in MED3pa can run before a workspace exists, and no analysis can be configured before a dataset and a model are in it. This stage covers both.
+**Objective.** Create a workspace, import the two cohorts, and import the base model to be audited. On completion the workspace holds everything the analysis requires.
+
+Download the files listed on the [demonstration overview](./) before beginning.
 
 ## Opening the workspace
 
-On first launch the application asks for a **workspace folder**. For this proof of concept a fresh, empty folder is the right choice: the workspace is where `DATA/` and `MODELS/` are created, and where the local MongoDB stores the sessions, deployments and patient records this walkthrough produces. Keeping the demo in its own folder keeps its sessions from mixing with other studies.
+1. Launch MED3pa. The application opens on the workspace screen.
+2. Click **Open workspace…** ① and select an empty folder. Folders opened previously are listed under _Recent_.
 
-<figure><img src="../.gitbook/assets/demo/01-workspace-gate.png" alt=""><figcaption><p>Figure 1: choosing the workspace folder. Folders opened before are listed under <em>Recent</em>.</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/demo/01-workspace-gate.png" alt=""><figcaption><p>Figure 1: the workspace screen</p></figcaption></figure>
 
-Once a folder is chosen, the module opens on the **Overview** page behind a thin header carrying the workspace path, a status light for the Go server, and the buttons for **Data & Models** and **System**. On a new workspace every counter reads zero.
+A workspace holds the imported datasets under `DATA/`, the imported models under `MODELS/`, and the MongoDB instance in which sessions, deployments and patient records are stored. An empty folder is used here so that the output of this walkthrough remains separate from other studies.
 
-<figure><img src="../.gitbook/assets/demo/02-workspace-overview.png" alt=""><figcaption><p>Figure 2: the workspace overview, with the header above it and the module's own sidebar on the left</p></figcaption></figure>
+3. Confirm that the header reports **Server ready** ①.
+
+<figure><img src="../.gitbook/assets/demo/02-workspace-overview.png" alt=""><figcaption><p>Figure 2: the Overview page of a new workspace, with the status indicator in the header</p></figcaption></figure>
 
 {% hint style="warning" %}
-If the status light is red, stop here. Open **System** and check the Python environment: the interpreter must have MED3pa installed, or every analysis will fail before it starts. See [Interface overview](../interface-overview.md#system-page) for what that page shows, and [Quick start](../quick-start.md#id-3.-python-environment) for how to build the environment.
+A red indicator means the Go server is not answering, which is most often caused by a Python environment without MED3pa installed. Resolve this before continuing: see the [System page](../interface-overview.md#system-page) and [Quick start](../quick-start.md#id-3.-python-environment).
 {% endhint %}
 
-## Importing the cohort
+## Importing the cohorts
 
-Open **Data & Models** from the header and stay on the **Datasets** tab. **Import CSV…** copies the chosen files into `DATA/` inside the workspace and re-scans it, which loads them into the local MongoDB and makes them selectable everywhere else.
+4. Click **Data & Models** in the header ①.
+5. Select the **Datasets** tab ②.
+6. Click **Import CSV…** ③.
+7. Select [`Holdout_prepared.csv`](../.gitbook/assets/Holdout_prepared.csv) and [`Deploy3_newmodel.csv`](../.gitbook/assets/Deploy3_newmodel.csv), then click **Open** ④.
 
-<figure><img src="../.gitbook/assets/demo/03-import-csv.png" alt=""><figcaption><p>Figure 3: importing the cohort. The panel reports zero datasets and zero base models, because this workspace is new.</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/demo/03-import-csv.png" alt=""><figcaption><p>Figure 3: importing the cohorts. Both counters read zero because the workspace is new.</p></figcaption></figure>
 
-Import both files this walkthrough uses:
+The two files serve different stages:
 
 | File | Rows | Used for |
 | --- | --- | --- |
-| [`Holdout_prepared.csv`](../.gitbook/assets/Holdout_prepared.csv) | 2,473 | The cohort the analysis is run over |
-| [`Deploy3_newmodel.csv`](../.gitbook/assets/Deploy3_newmodel.csv) | 3 | Unseen stays, applied to the deployed model in stage 4 |
+| `Holdout_prepared.csv` | 2,473 | The cohort the analysis is run over, in stage 2 |
+| `Deploy3_newmodel.csv` | 3 | Unseen stays, applied to the deployed model in stage 4 |
 
-{% hint style="info" %}
-Importing takes a copy. Editing the original CSV afterwards changes nothing in the workspace, so re-import it if the cohort is regenerated.
-{% endhint %}
+Importing copies each file into the workspace, so subsequent edits to the original have no effect on the imported copy. See [Datasets](../med3pa/data-and-models/datasets.md).
 
 ## Importing the base model
 
-Switch to the **Base models** tab. The model audited here is [`homr_oym_rf.onnx`](../.gitbook/assets/homr_oym_rf.onnx), a random forest predicting one-year mortality, exported to ONNX and imported straight from the file picker.
+8. Select the **Base models** tab ①.
+9. Click **Choose file…** ② and select [`homr_oym_rf.onnx`](../.gitbook/assets/homr_oym_rf.onnx).
+10. Enter `homr_oym_rf` in **Model name** ③.
+11. Enter `oym` in **Target column** ④.
+12. Open [`features.txt`](../.gitbook/assets/features.txt), copy its entire contents, and paste them into **Features, in the order the model expects them** ⑤.
 
-<figure><img src="../.gitbook/assets/demo/04-import-model-form.png" alt=""><figcaption><p>Figure 4: the Import External Model form, with the ONNX graph chosen and the target column set</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/demo/04-import-model-form.png" alt=""><figcaption><p>Figure 4: the import form, with the model file, name and target column supplied</p></figcaption></figure>
 
-This demonstration uses these four fields:
-
-| Field | Value used here |
-| --- | --- |
-| **Model file** | `homr_oym_rf.onnx` |
-| **Model name** | `homr_oym_rf`, saved as `<name>.medmodel` |
-| **Target column** | `oym` |
-| **Decision threshold** | `0.5`, the default |
-
-{% hint style="success" %}
-Download [`features.txt`](../.gitbook/assets/features.txt), open it, and **copy the whole file into the features box**. It is the complete list of 244 column names in model order, comma separated, which is exactly the format the field takes. Retyping them by hand is not worth attempting.
-{% endhint %}
+The file holds the 244 column names in the order the model expects them, comma separated, which is the format this field takes. Order is significant, because rows are assembled in the order given here.
 
 {% hint style="danger" %}
-`oym` is the target and is **not** in that list. Adding it would hand the model the answer and make every confidence estimate meaningless.
+`oym` is the quantity the model predicts and is therefore absent from the feature list. Adding it would supply the outcome as an input and invalidate every confidence estimate that follows.
 {% endhint %}
 
-Import writes the model into `MODELS/` as a `.medmodel`. Before saving anything, the application calls the model on a sample row, so a model that cannot be called is rejected here rather than halfway through an analysis.
+13. Leave **Decision threshold** at `0.5` ①.
+14. Leave **Outputs are raw logits** unticked ②.
+15. Leave **Probability output name** empty ③.
+16. Click **Import model** ④.
 
-### ONNX inputs
+<figure><img src="../.gitbook/assets/demo/05-onnx-options.png" alt=""><figcaption><p>Figure 5: the decision threshold and the two ONNX options, none of which is modified here</p></figcaption></figure>
 
-An ONNX graph carries no metadata about what its outputs mean, so the form grows two extra fields when the chosen file ends in `.onnx`. Both sit at the bottom of the panel, above **Import model**.
+Both ONNX options are left at their defaults because `homr_oym_rf.onnx` was exported with its final activation intact and exposes a single, recognisable probability output. The circumstances in which either applies are described under [ONNX options](../med3pa/data-and-models/base-models.md#onnx-options).
 
-<figure><img src="../.gitbook/assets/demo/05-onnx-options.png" alt=""><figcaption><p>Figure 5: the ONNX options. Neither is used for this proof of concept.</p></figcaption></figure>
+## What this produced
 
-### Outputs are raw logits
+The workspace now contains two cohorts under `DATA/` and one `.medmodel` under `MODELS/`. The model is validated at import: the application calls it on a sample row before saving, so a model that cannot be called is rejected here rather than during the analysis.
 
-A classifier normally ends with a sigmoid or a softmax, the step that squashes its internal score into a probability between 0 and 1. Some export pipelines strip that final layer off, so the graph returns the **raw logit** instead: an unbounded score where 0 means an even chance, large positive numbers mean likely, and large negative numbers mean unlikely.
+## Next
 
-MED3pa needs a probability, because every confidence estimate is computed from one. Ticking this box tells the application to apply the missing sigmoid itself.
-
-{% hint style="danger" %}
-Nothing can detect this automatically. A logit of 2.5 and a probability of 2.5 are indistinguishable to the importer, so getting the box wrong produces confidence scores that look entirely plausible and are wrong throughout. Tick it only when you know the graph was exported without its final activation.
-{% endhint %}
-
-**This proof of concept leaves it unticked.** `homr_oym_rf.onnx` was exported with its activation intact and already returns probabilities, so applying a second sigmoid would distort every number downstream.
-
-### Probability output name
-
-Some graphs expose several outputs, typically a hard label alongside the probabilities. When none of them is named in a way the importer recognises, this field names the one to read. `homr_oym_rf.onnx` does not need it either, so it is left blank.
-
-With a cohort and a model in the workspace, the analysis can be configured. Continue to [Configuring the run](configuration.md).
+Open **Configuration** in the module sidebar and continue with [Configuring the run](configuration.md).
